@@ -1,0 +1,18 @@
+#### Ziel
+Diese Darstellung dient dem Aufdecken von Trends bei den Wahlergebnissen der Pankower Grünen. Die angezeigten Graphen sind prinzipiell erweiterbar um andere Wahlergebnisse z.B. der Wahlen zu Abgeordnetenhaus. 
+
+#### Darstellung
+Wahlergebnisse der Partei "Die Grünen" in den Wahlen zur Bezirksverordnetenversammlung zwischen 1995 und 2016 in Berlin. Die Darstellung erfolgt in absoluten und in relativen Zahlen (in %). 
+
+#### Datenquelle
+Alle Daten entstammen dem Landesamt für Statistik Berlin-Brandenburg. Die Daten wurden im März 2021 von der Seite [wahlen-berlin.de](https://www.wahlen-berlin.de/Historie/hist_Wahlen.asp) heruntergeladen
+
+#### Karten
+Die Kartendateien (Shape-Files) sind von der Seite [Open-Data Berlin](https://daten.berlin.de/datensaetze/geometrien-der-wahlbezirke-f%C3%BCr-die-wahl-zum-abgeordnetenhaus-von-berlin-und-zu-den-0) 
+
+#### Methoden
+Die Daten wurden verarbeitet mit R. Die Darstellung erfolgt durch ein [Flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/index.html). Die Zahlen wurden nach bestem Wissen und Gewissen geprüft - Fehler sind aber selbstverständlich möglich. Die genaue Berechnung ist aus dem Source-Code zu entnehmen (oben rechts).
+
+#### Limitationen
+Am problematischsten ist die Darstellung der Wahlbezirke und der Abgeordnetenwahlkreise innerhalb Pankows. Den frei verfügbaren Informationen im Netz ist die Änderung der Wahlkreise nicht exakt und maschinenlesbar zu entnehmen. Deswegen erfolgt hier nur die Darstellung der letzten zwei Wahlen.
+
