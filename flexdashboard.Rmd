@@ -19,6 +19,14 @@ library(plotly) # animated ggplots
 library(sf) # Reading shapefiles
 
 # Einlesen der Datenquellen, diese wurden von hier: https://www.wahlen-berlin.de/Historie/hist_Wahlen.asp heruntergeladen und nach der jeweiligen Jahreszahl benannt (z.B. 2001.xlsx). Das Skript nimmt an, dass diese Excel-Dateien im selben Ordner wie das Markdown-Dokument liegen. Es werden alle Excel-Tabellen im Ordner eingelesen, bei denen ein "BVV" Tabellenblatt enthalten ist. 
+
+# if(!file.exists("data/2016.xlsx")){download.file("https://www.statistik-berlin-brandenburg.de/publikationen/Dowmies/DL_BE_EE_WB_AH2016.xlsx", "data/2016.xlsx")}
+if(!file.exists("data/2011.xlsx")){download.file("https://www.statistik-berlin-brandenburg.de/publikationen/Dowmies/DL_BE_AB2011.xlsx", "data/2011.xlsx")}
+if(!file.exists("data/2006.xlsx")){download.file("https://www.statistik-berlin-brandenburg.de/publikationen/Dowmies/DL_BE_AB2006.xlsx", "data/2006.xlsx")}
+if(!file.exists("data/2001.xlsx")){download.file("https://www.statistik-berlin-brandenburg.de/publikationen/Dowmies/DL_BE_AB2001.xlsx", "data/2001.xlsx")}
+if(!file.exists("data/1999.xlsx")){download.file("https://www.statistik-berlin-brandenburg.de/publikationen/Dowmies/DL_BE_AB1999.xlsx", "data/1999.xlsx")}
+if(!file.exists("data/1995.xlsx")){download.file("https://www.statistik-berlin-brandenburg.de/publikationen/Dowmies/DL_BE_AB1995.xlsx", "data/1995.xlsx")}
+   
 excelfiles <- list.files(path = "data", pattern=".xlsx")
 for (i in 1:length(excelfiles)){
   jahr <- str_split(excelfiles[i], "\\.")[[1]][1] # Herausfiltern des Namens
