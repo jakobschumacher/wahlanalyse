@@ -1,7 +1,7 @@
 ---
 title: "Grüne BVV Wahlergebnisse"
-author: "Jakob Schumacher"
-date: "6. April 2021"
+author: "Julius Oblong und Jakob Schumacher"
+date: "8. Mai 2021"
 output: 
   flexdashboard::flex_dashboard:
     storyboard: true
@@ -12,6 +12,7 @@ output:
 ```{r setup, include=FALSE}
 library(flexdashboard) # Presentation
 library(tidyverse) # Tidying data
+library(janitor) # To clean names of a dataset
 library(dygraphs) # Graphpackage
 library(readxl) # Reading excelfiles
 library(xts) # For converting a data.frame into a time object
@@ -27,10 +28,18 @@ if(!file.exists("data/2001.xlsx")){download.file("https://www.statistik-berlin-b
 if(!file.exists("data/1999.xlsx")){download.file("https://www.statistik-berlin-brandenburg.de/publikationen/Dowmies/DL_BE_AB1999.xlsx", "data/1999.xlsx")}
 if(!file.exists("data/1995.xlsx")){download.file("https://www.statistik-berlin-brandenburg.de/publikationen/Dowmies/DL_BE_AB1995.xlsx", "data/1995.xlsx")}
    
+
+# Testing
+# i = 3
+
 excelfiles <- list.files(path = "data", pattern=".xlsx")
 for (i in 1:length(excelfiles)){
   jahr <- str_split(excelfiles[i], "\\.")[[1]][1] # Herausfiltern des Namens
+  print(jahr)
+  # Read BVV Data
   data <- readxl::read_xlsx(paste0("data/", excelfiles[i]), sheet="BVV") %>% 
+     bind_rows(readxl::read_xlsx(paste0("data/", excelfiles[i]), sheet="Erststimme")) %>% 
+     bind_rows(readxl::read_xlsx(paste0("data/", excelfiles[i]), sheet="Zweitstimme")) %>% 
     janitor::clean_names() # Die Namen der Variablen werden gesäubert
   startnumber <- match("gultige_stimmen", names(data)) + 1 # Finde die erste Partei in den Variablennamen
   data <- data %>%
@@ -38,27 +47,39 @@ for (i in 1:length(excelfiles)){
     pivot_longer(all_of(startnumber):last_col(), names_to="Parteien", values_to="Stimmen") %>% # Pivot des Datensatzes mit Tidyr
     mutate(year = as.Date(paste0("01-01-", all_of(jahr)), format = "%d-%m-%Y")) 
   assign(paste0("data_bvv_", jahr), data) 
+  
+  # # Read AGH Data
+  # data <- readxl::read_xlsx(paste0("data/", excelfiles[i]), sheet="Erststimme") %>% 
+  #  
+  #   janitor::clean_names() # Die Namen der Variablen werden gesäubert 
+  # startnumber <- match("gultige_stimmen", names(data)) + 1 # Finde die erste Partei in den Variablennamen
+  # data <- data %>%
+  #   select(-starts_with("EB")) %>% # Alle Einzelbewerber werden herausgefiltert
+  #   pivot_longer(all_of(startnumber):last_col(), names_to="Parteien", values_to="Stimmen") %>% # Pivot des Datensatzes mit Tidyr
+  #   mutate(year = as.Date(paste0("01-01-", all_of(jahr)), format = "%d-%m-%Y")) 
+  # assign(paste0("data_agh_", jahr), data) 
+
 }
 
 # Säubern des Datensatzes 1992
-data_bvv_1992 <- data_bvv_1992 %>% 
-  mutate(wahlberechtigte_a1 = NA) %>% 
-  mutate(wahlberechtigte_a2 = NA) %>% 
-  mutate(wahlberechtigte_a3 = NA) %>% 
-  mutate(wahler_b1 = NA) %>% 
-  mutate(bundestagswahlkreis = NA) %>% 
-  mutate(newbezirksname = bezirksname) %>% 
-  mutate(newbezirksname = ifelse(bezirksname == "Hellersdorf"|bezirksname == "Marzahn", "Marzahn-Hellersdorf", newbezirksname)) %>% 
-  mutate(newbezirksname = ifelse(bezirksname == "Friedrichshain"|bezirksname == "Kreuzberg", "Friedrichshain-Kreuzberg", newbezirksname)) %>% 
-  mutate(newbezirksname = ifelse(bezirksname == "Charlottenburg"|bezirksname == "Wilmersdorf", "Charlottenburg-Wilmersdorf", newbezirksname)) %>% 
-  mutate(newbezirksname = ifelse(bezirksname == "Köpenick"|bezirksname == "Treptow", "Treptow-Köpenick", newbezirksname)) %>% 
-  mutate(newbezirksname = ifelse(bezirksname == "Steglitz"|bezirksname == "Zehlendorf", "Steglitz-Zehlendorf", newbezirksname)) %>% 
-  mutate(newbezirksname = ifelse(bezirksname == "Schöneberg"|bezirksname == "Tempelhof", "Tempelhof-Schöneberg", newbezirksname)) %>% 
-  mutate(newbezirksname = ifelse(bezirksname == "Hohenschönhausen", "Lichtenberg", newbezirksname)) %>% 
-  mutate(newbezirksname = ifelse(bezirksname == "Weißensee"|bezirksname == "Prenzlauer Berg", "Pankow", newbezirksname)) %>% 
-  mutate(newbezirksname = ifelse(bezirksname == "Tiergarten"|bezirksname == "Wedding", "Mitte", newbezirksname)) %>% 
-  mutate(bezirksname = newbezirksname) %>% 
-  select(-newbezirksname)
+# data_bvv_1992 <- data_bvv_1992 %>% 
+#   mutate(wahlberechtigte_a1 = NA) %>% 
+#   mutate(wahlberechtigte_a2 = NA) %>% 
+#   mutate(wahlberechtigte_a3 = NA) %>% 
+#   mutate(wahler_b1 = NA) %>% 
+#   mutate(bundestagswahlkreis = NA) %>% 
+#   mutate(newbezirksname = bezirksname) %>% 
+#   mutate(newbezirksname = ifelse(bezirksname == "Hellersdorf"|bezirksname == "Marzahn", "Marzahn-Hellersdorf", newbezirksname)) %>% 
+#   mutate(newbezirksname = ifelse(bezirksname == "Friedrichshain"|bezirksname == "Kreuzberg", "Friedrichshain-Kreuzberg", newbezirksname)) %>% 
+#   mutate(newbezirksname = ifelse(bezirksname == "Charlottenburg"|bezirksname == "Wilmersdorf", "Charlottenburg-Wilmersdorf", newbezirksname)) %>% 
+#   mutate(newbezirksname = ifelse(bezirksname == "Köpenick"|bezirksname == "Treptow", "Treptow-Köpenick", newbezirksname)) %>% 
+#   mutate(newbezirksname = ifelse(bezirksname == "Steglitz"|bezirksname == "Zehlendorf", "Steglitz-Zehlendorf", newbezirksname)) %>% 
+#   mutate(newbezirksname = ifelse(bezirksname == "Schöneberg"|bezirksname == "Tempelhof", "Tempelhof-Schöneberg", newbezirksname)) %>% 
+#   mutate(newbezirksname = ifelse(bezirksname == "Hohenschönhausen", "Lichtenberg", newbezirksname)) %>% 
+#   mutate(newbezirksname = ifelse(bezirksname == "Weißensee"|bezirksname == "Prenzlauer Berg", "Pankow", newbezirksname)) %>% 
+#   mutate(newbezirksname = ifelse(bezirksname == "Tiergarten"|bezirksname == "Wedding", "Mitte", newbezirksname)) %>% 
+#   mutate(bezirksname = newbezirksname) %>% 
+#   select(-newbezirksname)
 
 # Säubern des Datensatzes 1995
 data_bvv_1995 <- data_bvv_1995 %>% 
@@ -100,8 +121,8 @@ data_bvv_2016 <- data_bvv_2016 %>%
   mutate(abgeordnetenhauswahlkreis = paste0("0",str_sub(wahlbezirk, 1,1)))
 
 # Zusammenfassung der Datensätze
-df_complete<- rbind(data_bvv_1992, data_bvv_1995, data_bvv_1999, data_bvv_2001, data_bvv_2006, data_bvv_2011, data_bvv_2016)
-# rm(data_bvv_1992, data_bvv_1995, data_bvv_1999, data_bvv_2001, data_bvv_2006, data_bvv_2011, data_bvv_2016, startnumber, jahr, i, excelfiles, data)
+df_complete<- rbind(data_bvv_1995, data_bvv_1999, data_bvv_2001, data_bvv_2006, data_bvv_2011, data_bvv_2016)
+# rm(data_bvv_1995, data_bvv_1999, data_bvv_2001, data_bvv_2006, data_bvv_2011, data_bvv_2016, startnumber, jahr, i, excelfiles, data)
 
 ```
 
@@ -109,6 +130,7 @@ df_complete<- rbind(data_bvv_1992, data_bvv_1995, data_bvv_1999, data_bvv_2001, 
 ```{r, "Berlin_absolut"}
 df_complete %>% 
   filter(Parteien == "grune") %>% # Hier erfolgt die Filterung nach der Partei "Die Grünen"
+  filter(stimmart == "BVV") %>% # Hier erfolgt die Filterung nach der Wahlart
   group_by(year, bezirksname) %>% 
   summarise(anzahl = sum(Stimmen), .groups = 'drop') %>% # Hier erfolgt die Berechnung in diesem Fall das simple zusammenzählen
   pivot_wider(names_from = bezirksname, values_from = anzahl) -> # xts braucht einen "breiten" Datensatz
@@ -138,6 +160,7 @@ d1 # Anzeige des Graphen
 # Kommentare siehe obigen chunk
 df_complete %>% 
   filter(Parteien == "grune") %>% 
+  filter(stimmart == "BVV") %>% # Hier erfolgt die Filterung nach der Wahlart
   group_by(year, bezirksname) %>% 
   summarise(anzahl = 100*sum(Stimmen)/sum(gultige_stimmen), .groups = 'drop') %>% 
   pivot_wider(names_from = bezirksname, values_from = anzahl) ->
@@ -160,6 +183,7 @@ d1
 # Kommentare siehe obigen chunk
 df <- df_complete %>% 
   filter(Parteien == "grune") %>% 
+  filter(stimmart == "BVV") %>% # Hier erfolgt die Filterung nach der Wahlart
   filter(bezirksname == "Pankow") %>% 
   filter(year > as.Date("01-01-2005", format="%d-%m-%Y"),) %>% 
   group_by(year, abgeordnetenhauswahlkreis) %>% 
@@ -185,6 +209,7 @@ d1
 df <- df_complete %>% 
   filter(Parteien == "grune") %>% 
   filter(bezirksname == "Pankow") %>% 
+  filter(stimmart == "BVV") %>% # Hier erfolgt die Filterung nach der Wahlart
   filter(year > as.Date("01-01-2005", format="%d-%m-%Y")) %>% 
   group_by(year, abgeordnetenhauswahlkreis) %>% 
   summarise(anzahl = 100*sum(Stimmen)/sum(gultige_stimmen), .groups = 'drop') %>% 
@@ -210,6 +235,7 @@ d1
 
 df <- df_complete %>% 
   filter(Parteien == "grune") %>% 
+  filter(stimmart == "BVV") %>% # Hier erfolgt die Filterung nach der Wahlart
   filter(bezirksname == "Pankow") %>% 
   filter(year > as.Date("01-01-2010", format="%d-%m-%Y")) %>% 
   group_by(year, wahlbezirk, abgeordnetenhauswahlkreis) %>% 
@@ -248,11 +274,42 @@ ggplotly(
 ggplot(wahlkreise) +
   geom_sf(aes(color = Wahlbezirk, fill = Prozent_2016)) +
   theme_void() +
-  theme(legend.position = "none") +
+  theme(legend.position = "none") + 
   scale_fill_continuous(name = "", low = "#ccffcc", high = "darkgreen") +
   scale_color_discrete("black")
 )
 ```
+
+### Differenz Zweitstimme minus Erststimme
+```{r, "Differenz_zweit_erst"}
+df <- df_complete %>% 
+  filter(Parteien == "grune") %>% 
+  filter(bezirksname == "Pankow") %>% 
+  filter(year > as.Date("01-01-2010", format="%d-%m-%Y")) %>% 
+  group_by(year, abgeordnetenhauswahlkreis, wahlbezirk, stimmart) %>% 
+  summarise(prozent = 100*sum(Stimmen)/sum(gultige_stimmen), .groups = 'drop') %>% 
+  pivot_wider(names_from = stimmart, values_from = prozent) %>% 
+  mutate(differenz_1_2 = Zweitstimme - Erststimme) %>% 
+  mutate(differenz_2_bvv = Zweitstimme - BVV)
+
+ggplotly(ggplot(df, aes(x = wahlbezirk, y = differenz_1_2, fill = abgeordnetenhauswahlkreis)) + 
+           geom_bar(stat = "identity") +
+           facet_wrap(. ~ year) +
+           theme_void()
+         )
+
+```
+
+
+### Differenz Zweistimme minus BVV-Stimmen
+```{r}
+ggplotly(ggplot(df, aes(x = wahlbezirk, y = differenz_2_bvv, fill = abgeordnetenhauswahlkreis)) + 
+           geom_bar(stat = "identity") +
+           facet_wrap(. ~ year) +
+           theme_void()
+         )
+```
+
 
 
 ### Erläuterungen
