@@ -1,0 +1,10 @@
+name: Publish Website
+title:
+username:
+account: rpubs
+server: rpubs.com
+hostUrl: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/750868/6e9f0bc75d7844c48b356b10dad88230
+bundleId: https://api.rpubs.com/api/v1/document/750868/6e9f0bc75d7844c48b356b10dad88230
+url: http://rpubs.com/jakobschumacher/750868
+when: 1620501739.56143
