@@ -280,7 +280,28 @@ ggplot(wahlkreise) +
   scale_color_discrete("black")
 )
 ```
+### Karte der Wahlbezirke in Pankow / Differenz erststimme & Zweitstimme
 
+
+```{r, Karte, message=FALSE}
+
+View(percentagedata2)
+percentagedata2 <- df %>% 
+  filter(year == as.Date("01-01-2016", format="%d-%m-%Y")) %>% 
+  rename(UWB = wahlbezirk)
+
+# Read Shapefile
+wahlkreise <- st_read("geo/UWB.shp", quiet = TRUE) %>% filter(BEZ == "03") %>% left_join(percentagedata2) %>% rename(Wahlbezirk = UWB)
+  
+ggplotly(
+ggplot(wahlkreise) +
+  geom_sf(aes(color = Wahlbezirk, fill = differenz_1_2)) +
+  theme_void() +
+  theme(legend.position = "none") + 
+  scale_fill_continuous(name = "", low = "#ccffcc", high = "darkgreen") +
+  scale_color_discrete("black")
+)
+```
 ### Differenz Zweitstimme minus Erststimme
 ```{r, "Differenz_zweit_erst"}
 df <- df_complete %>% 
