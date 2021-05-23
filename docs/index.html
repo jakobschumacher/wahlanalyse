@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Wahlergebnisse der Berliner Grünen</title>
+  <meta name="description" content="Diese Darstellung dient dem Aufdecken von Trends bei den Wahlergebnissen der Berliner Grünen mit einem Fokus auf Pankow." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Wahlergebnisse der Berliner Grünen" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Diese Darstellung dient dem Aufdecken von Trends bei den Wahlergebnissen der Berliner Grünen mit einem Fokus auf Pankow." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Wahlergebnisse der Berliner Grünen" />
+  
+  <meta name="twitter:description" content="Diese Darstellung dient dem Aufdecken von Trends bei den Wahlergebnissen der Berliner Grünen mit einem Fokus auf Pankow." />
+  
+
+<meta name="author" content="Jakob Schumacher, Julius Oblong" />
+
+
+<meta name="date" content="2021-05-23" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="wahlkarten.html"/>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.4.1/leaflet-providers-plugin.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Grüne Wahlergebnisse</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Einleitung</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#ziel"><i class="fa fa-check"></i><b>1.1</b> Ziel</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#datenquelle"><i class="fa fa-check"></i><b>1.2</b> Datenquelle</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#karten"><i class="fa fa-check"></i><b>1.3</b> Karten</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#methoden"><i class="fa fa-check"></i><b>1.4</b> Methoden</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#limitationen"><i class="fa fa-check"></i><b>1.5</b> Limitationen</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="wahlkarten.html"><a href="wahlkarten.html"><i class="fa fa-check"></i><b>2</b> Wahlkarten</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="wahlkarten.html"><a href="wahlkarten.html#eu-wahl-2019"><i class="fa fa-check"></i><b>2.1</b> EU-Wahl 2019</a></li>
+<li class="chapter" data-level="2.2" data-path="wahlkarten.html"><a href="wahlkarten.html#bundestagswahl-erststimme-2017"><i class="fa fa-check"></i><b>2.2</b> Bundestagswahl Erststimme 2017</a></li>
+<li class="chapter" data-level="2.3" data-path="wahlkarten.html"><a href="wahlkarten.html#bundestagswahl-zweitstimme-2017"><i class="fa fa-check"></i><b>2.3</b> Bundestagswahl Zweitstimme 2017</a></li>
+<li class="chapter" data-level="2.4" data-path="wahlkarten.html"><a href="wahlkarten.html#bvv-wahl-2016"><i class="fa fa-check"></i><b>2.4</b> BVV-Wahl 2016</a></li>
+<li class="chapter" data-level="2.5" data-path="wahlkarten.html"><a href="wahlkarten.html#agh-erststimme-2016"><i class="fa fa-check"></i><b>2.5</b> AGH Erststimme 2016</a></li>
+<li class="chapter" data-level="2.6" data-path="wahlkarten.html"><a href="wahlkarten.html#agh-zweitstimme-2016"><i class="fa fa-check"></i><b>2.6</b> AGH Zweitstimme 2016</a></li>
+<li class="chapter" data-level="2.7" data-path="wahlkarten.html"><a href="wahlkarten.html#eu-wahl-2014"><i class="fa fa-check"></i><b>2.7</b> EU-Wahl 2014</a></li>
+<li class="chapter" data-level="2.8" data-path="wahlkarten.html"><a href="wahlkarten.html#bundestagswahl-erststimme-2013"><i class="fa fa-check"></i><b>2.8</b> Bundestagswahl Erststimme 2013</a></li>
+<li class="chapter" data-level="2.9" data-path="wahlkarten.html"><a href="wahlkarten.html#bundestagswahl-zweitstimme-2013"><i class="fa fa-check"></i><b>2.9</b> Bundestagswahl Zweitstimme 2013</a></li>
+<li class="chapter" data-level="2.10" data-path="wahlkarten.html"><a href="wahlkarten.html#bvv-wahl-2011"><i class="fa fa-check"></i><b>2.10</b> BVV-Wahl 2011</a></li>
+<li class="chapter" data-level="2.11" data-path="wahlkarten.html"><a href="wahlkarten.html#agh-erststimme-2011"><i class="fa fa-check"></i><b>2.11</b> AGH Erststimme 2011</a></li>
+<li class="chapter" data-level="2.12" data-path="wahlkarten.html"><a href="wahlkarten.html#agh-zweitstimme-2011"><i class="fa fa-check"></i><b>2.12</b> AGH Zweitstimme 2011</a></li>
+<li class="chapter" data-level="2.13" data-path="wahlkarten.html"><a href="wahlkarten.html#euwahl-2009"><i class="fa fa-check"></i><b>2.13</b> EUwahl 2009</a></li>
+<li class="chapter" data-level="2.14" data-path="wahlkarten.html"><a href="wahlkarten.html#bundestagswahl-erststimme-2009"><i class="fa fa-check"></i><b>2.14</b> Bundestagswahl Erststimme 2009</a></li>
+<li class="chapter" data-level="2.15" data-path="wahlkarten.html"><a href="wahlkarten.html#bundestagswahl-zweitstimme-2009"><i class="fa fa-check"></i><b>2.15</b> Bundestagswahl Zweitstimme 2009</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="zeitverläufe.html"><a href="zeitverläufe.html"><i class="fa fa-check"></i><b>3</b> Zeitverläufe</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="zeitverläufe.html"><a href="zeitverläufe.html#entwicklung-der-wahlergebnisse-der-großen-parteien-in-pankow-2009-bis-2019"><i class="fa fa-check"></i><b>3.1</b> Entwicklung der Wahlergebnisse der großen Parteien in Pankow 2009 bis 2019</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="zusammenhänge.html"><a href="zusammenhänge.html"><i class="fa fa-check"></i><b>4</b> Zusammenhänge</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="zusammenhänge.html"><a href="zusammenhänge.html#wie-hängt-das-alter-mit-den-wahlergebnissen-der-grünen-zusammen"><i class="fa fa-check"></i><b>4.1</b> Wie hängt das Alter mit den Wahlergebnissen der Grünen zusammen?</a></li>
+<li class="chapter" data-level="4.2" data-path="zusammenhänge.html"><a href="zusammenhänge.html#altesmittelwert-der-wahlbezirke"><i class="fa fa-check"></i><b>4.2</b> Altesmittelwert der Wahlbezirke</a></li>
+<li class="chapter" data-level="4.3" data-path="zusammenhänge.html"><a href="zusammenhänge.html#wie-hängt-die-wohnlage-mit-den-wahlergebnissen-der-grünen-zusammen"><i class="fa fa-check"></i><b>4.3</b> Wie hängt die Wohnlage mit den Wahlergebnissen der Grünen zusammen?</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="zusammenhänge.html"><a href="zusammenhänge.html#gute-wohnlage"><i class="fa fa-check"></i><b>4.3.1</b> Gute Wohnlage</a></li>
+<li class="chapter" data-level="4.3.2" data-path="zusammenhänge.html"><a href="zusammenhänge.html#einfache-wohnlage"><i class="fa fa-check"></i><b>4.3.2</b> Einfache Wohnlage</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="zusammenhänge.html"><a href="zusammenhänge.html#wie-hängt-lärm-und-das-wahlergebnis-der-grünen-zusammen"><i class="fa fa-check"></i><b>4.4</b> Wie hängt Lärm und das Wahlergebnis der Grünen zusammen?</a></li>
+<li class="chapter" data-level="4.5" data-path="zusammenhänge.html"><a href="zusammenhänge.html#anteil-der-wohnlagen-mit-lärm-pro-wahlbezirk-als-karte"><i class="fa fa-check"></i><b>4.5</b> Anteil der Wohnlagen mit Lärm pro Wahlbezirk als Karte</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="potentialanalyse.html"><a href="potentialanalyse.html"><i class="fa fa-check"></i><b>5</b> Potentialanalyse</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="potentialanalyse.html"><a href="potentialanalyse.html#wobble-bezirke"><i class="fa fa-check"></i><b>5.1</b> “Wobble”-Bezirke</a></li>
+<li class="chapter" data-level="5.2" data-path="potentialanalyse.html"><a href="potentialanalyse.html#differenez-der-erst--und-zweitstimmen-bei-der-bundestagswahl-2009"><i class="fa fa-check"></i><b>5.2</b> Differenez der Erst- und Zweitstimmen bei der Bundestagswahl 2009</a></li>
+<li class="chapter" data-level="5.3" data-path="potentialanalyse.html"><a href="potentialanalyse.html#differenez-der-erst--und-zweitstimmen-bei-den-wahlen-zum-abgeordnetenhaus-2011"><i class="fa fa-check"></i><b>5.3</b> Differenez der Erst- und Zweitstimmen bei den Wahlen zum Abgeordnetenhaus 2011</a></li>
+<li class="chapter" data-level="5.4" data-path="potentialanalyse.html"><a href="potentialanalyse.html#differenez-der-erst--und-zweitstimmen-bei-der-bundestagswahl-2013"><i class="fa fa-check"></i><b>5.4</b> Differenez der Erst- und Zweitstimmen bei der Bundestagswahl 2013</a></li>
+<li class="chapter" data-level="5.5" data-path="potentialanalyse.html"><a href="potentialanalyse.html#differenez-der-erst--und-zweitstimmen-bei-den-wahlen-zum-abgeordnetenhaus-2016"><i class="fa fa-check"></i><b>5.5</b> Differenez der Erst- und Zweitstimmen bei den Wahlen zum Abgeordnetenhaus 2016</a></li>
+<li class="chapter" data-level="5.6" data-path="potentialanalyse.html"><a href="potentialanalyse.html#differenez-der-erst--und-zweitstimmen-bei-der-bundestagswahl-2017"><i class="fa fa-check"></i><b>5.6</b> Differenez der Erst- und Zweitstimmen bei der Bundestagswahl 2017</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Wahlergebnisse der Berliner Grünen</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Wahlergebnisse der Berliner Grünen</h1>
+<p class="author"><em>Jakob Schumacher, Julius Oblong</em></p>
+<p class="date" style="margin-top: 1.5em;"><em>2021-05-23</em></p>
+</div>
+<div id="einleitung" class="section level1" number="1">
+<h1><span class="header-section-number">Kapitel 1</span> Einleitung</h1>
+<div class="figure">
+<img src="https://www.gruene-hessen.de/werkzeugkasten/wp-content/themes/hessengruen/images/vorschaubild.jpg" style="width:20.0%" alt="" />
+<p class="caption">Partei Logo</p>
+</div>
+<div id="ziel" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Ziel</h2>
+<p>Diese Darstellung dient dem Aufdecken von Trends bei den Wahlergebnissen der Pankower Grünen. Die angezeigten Graphen sind prinzipiell erweiterbar um andere Wahlergebnisse z.B. der Wahlen zu Abgeordnetenhaus.</p>
+</div>
+<div id="datenquelle" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Datenquelle</h2>
+<p>Alle Daten entstammen dem Landesamt für Statistik Berlin-Brandenburg. Die Daten wurden im März 2021 von der Seite <a href="https://www.wahlen-berlin.de/Historie/hist_Wahlen.asp">wahlen-berlin.de</a> heruntergeladen</p>
+</div>
+<div id="karten" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Karten</h2>
+<p>Die Kartendateien (Shape-Files) sind von der Seite <a href="https://daten.berlin.de/datensaetze/geometrien-der-wahlbezirke-f%C3%BCr-die-wahl-zum-abgeordnetenhaus-von-berlin-und-zu-den-0">Open-Data Berlin</a></p>
+</div>
+<div id="methoden" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Methoden</h2>
+<p>Die Daten wurden verarbeitet mit R. Die Darstellung erfolgt durch ein <a href="https://rmarkdown.rstudio.com/flexdashboard/index.html">Flexdashboard</a>. Die Zahlen wurden nach bestem Wissen und Gewissen geprüft - Fehler sind aber selbstverständlich möglich. Die genaue Berechnung ist aus dem Source-Code zu entnehmen (oben rechts).</p>
+</div>
+<div id="limitationen" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Limitationen</h2>
+<p>Am problematischsten ist die Darstellung der Wahlbezirke und der Abgeordnetenwahlkreise innerhalb Pankows. Den frei verfügbaren Informationen im Netz ist die Änderung der Wahlkreise nicht exakt und maschinenlesbar zu entnehmen. Deswegen erfolgt hier nur die Darstellung der letzten zwei Wahlen.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="wahlkarten.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["2021_05_20_Wahlergebnisse_bookdown.pdf", "2021_05_20_Wahlergebnisse_bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
