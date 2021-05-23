@@ -1,0 +1,6 @@
+book_filename: "2021_05_20_Wahlergebnisse_bookdown"
+delete_merged_file: true
+new_session: false
+language:
+  ui:
+    chapter_name: "Kapitel "

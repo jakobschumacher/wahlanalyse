@@ -1,0 +1,40 @@
+# Zeitverläufe
+
+
+## Entwicklung der Wahlergebnisse der großen Parteien in Pankow 2009 bis 2019
+```{r Zeitverläufe1, echo=FALSE, message=FALSE}
+suppressPackageStartupMessages(library(tidyverse)) # Tidying data
+suppressPackageStartupMessages(library(sf)) # Reading Shapefiles
+suppressPackageStartupMessages(library(here)) # Find correct place to load 
+suppressPackageStartupMessages(library(tmap)) # Find correct place to load 
+suppressPackageStartupMessages(library(ggalt)) # For splinter
+
+df_wahlen <- readRDS(file=here("data/df_wahlen.rds"))
+
+df_temp <- df_wahlen %>% 
+  filter(bezirksname == "Pankow") %>% 
+  group_by(jahr, partei, wahl) %>% 
+  summarise(mean = mean(stimmanteil)) %>% 
+  ungroup() %>% 
+  group_by(jahr, partei) %>% 
+  summarise(mean = mean(mean)) %>% 
+  mutate(partei = factor(partei, levels = c("af_d", "cdu", "die_linke", "fdp", "grune", "spd"), labels = c("AFD", "CDU", "Linkspartei", "FDP", "Grüne", "SPD")))
+
+
+ggplot(df_temp) +
+  geom_point(aes(x=jahr, y=mean, color = partei)) +
+  geom_xspline(aes(x = jahr, y = mean, color = partei), size = 0.8, spline_shape = -.25) +
+  theme_classic() +
+   scale_color_manual(values = c("AFD" = "deepskyblue", "CDU" = "black", "Linkspartei" = "hotpink1", "FDP" = "gold", "Grüne" = "forestgreen", "SPD" = "red")) +
+  theme(legend.position = "bottom") +
+  labs(    color = "",
+           x = "",
+           y = "Stimmanteil in % *",
+           subtitle = waiver(),
+           caption = "* Stimmanteile von gleichzeitigen Wahlen wurden gemittelt",
+           tag = waiver()
+) +
+  theme(text=element_text(size=20,  family="sans"))
+  
+```
+

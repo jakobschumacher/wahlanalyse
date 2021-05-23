@@ -1,0 +1,419 @@
+---
+title: "Pankower Grüne - Wahlergebnisse BVV und Abgeordnetenhaus"
+author: "Julius Oblong und Jakob Schumacher"
+date: "8. Mai 2021"
+output: 
+  flexdashboard::flex_dashboard:
+    storyboard: true
+    source: embed
+    theme: readable
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard) # Presentation
+library(tidyverse) # Tidying data
+library(janitor) # To clean names of a dataset
+library(dygraphs) # Graphpackage
+library(xts) # For converting a data.frame into a time object
+library(plotly) # animated ggplots
+library(sf) # Reading shapefiles
+library(tmap) # Displaying maps
+``` 
+
+```{r wahlergebnisse bvv und agh, include = FALSE}
+# Einlesen der Wahlergebnisse, diese wurden von hier: https://www.wahlen-berlin.de/Historie/hist_Wahlen.asp heruntergeladen und nach der jeweiligen Jahreszahl benannt (z.B. 2001.xlsx). Das Skript nimmt an, dass diese Excel-Dateien im selben Ordner wie das Markdown-Dokument liegen. Es werden alle Excel-Tabellen im Ordner eingelesen, bei denen ein "BVV" Tabellenblatt enthalten ist. 
+
+if(!file.exists("data/2016.xlsx")){download.file("https://www.statistik-berlin-brandenburg.de/publikationen/Dowmies/DL_BE_EE_WB_AH2016.xlsx", "data/2016.xlsx")}
+if(!file.exists("data/2011.xlsx")){download.file("https://www.statistik-berlin-brandenburg.de/publikationen/Dowmies/DL_BE_AB2011.xlsx", "data/2011.xlsx")}
+if(!file.exists("data/2006.xlsx")){download.file("https://www.statistik-berlin-brandenburg.de/publikationen/Dowmies/DL_BE_AB2006.xlsx", "data/2006.xlsx")}
+if(!file.exists("data/2001.xlsx")){download.file("https://www.statistik-berlin-brandenburg.de/publikationen/Dowmies/DL_BE_AB2001.xlsx", "data/2001.xlsx")}
+if(!file.exists("data/1999.xlsx")){download.file("https://www.statistik-berlin-brandenburg.de/publikationen/Dowmies/DL_BE_AB1999.xlsx", "data/1999.xlsx")}
+if(!file.exists("data/1995.xlsx")){download.file("https://www.statistik-berlin-brandenburg.de/publikationen/Dowmies/DL_BE_AB1995.xlsx", "data/1995.xlsx")}
+
+# Testing
+# i = 3
+
+excelfiles <- list.files(path = "data", pattern=".xlsx")
+for (i in 1:length(excelfiles)){
+  jahr <- str_split(excelfiles[i], "\\.")[[1]][1] # Herausfiltern des Namens
+  print(jahr)
+  # Read BVV Data
+  data <- readxl::read_xlsx(paste0("data/", excelfiles[i]), sheet="BVV") %>% 
+     bind_rows(readxl::read_xlsx(paste0("data/", excelfiles[i]), sheet="Erststimme")) %>% 
+     bind_rows(readxl::read_xlsx(paste0("data/", excelfiles[i]), sheet="Zweitstimme")) %>% 
+    janitor::clean_names() # Die Namen der Variablen werden gesäubert
+  startnumber <- match("gultige_stimmen", names(data)) + 1 # Finde die erste Partei in den Variablennamen
+  data <- data %>%
+    select(-starts_with("EB")) %>% # Alle Einzelbewerber werden herausgefiltert
+    pivot_longer(all_of(startnumber):last_col(), names_to="Parteien", values_to="Stimmen") %>% # Pivot des Datensatzes mit Tidyr
+    mutate(year = as.Date(paste0("01-01-", all_of(jahr)), format = "%d-%m-%Y")) 
+  assign(paste0("data_bvv_", jahr), data) 
+ }
+ 
+# Säubern des Datensatzes 1995
+data_bvv_1995 <- data_bvv_1995 %>% 
+  mutate(wahler_b1 = NA) %>% 
+  mutate(newbezirksname = bezirksname) %>% 
+  mutate(newbezirksname = ifelse(bezirksname == "Hellersdorf"|bezirksname == "Marzahn", "Marzahn-Hellersdorf", newbezirksname)) %>% 
+  mutate(newbezirksname = ifelse(bezirksname == "Friedrichshain"|bezirksname == "Kreuzberg", "Friedrichshain-Kreuzberg", newbezirksname)) %>% 
+  mutate(newbezirksname = ifelse(bezirksname == "Charlottenburg"|bezirksname == "Wilmersdorf", "Charlottenburg-Wilmersdorf", newbezirksname)) %>% 
+  mutate(newbezirksname = ifelse(bezirksname == "Köpenick"|bezirksname == "Treptow", "Treptow-Köpenick", newbezirksname)) %>% 
+  mutate(newbezirksname = ifelse(bezirksname == "Steglitz"|bezirksname == "Zehlendorf", "Steglitz-Zehlendorf", newbezirksname)) %>% 
+  mutate(newbezirksname = ifelse(bezirksname == "Schöneberg"|bezirksname == "Tempelhof", "Tempelhof-Schöneberg", newbezirksname)) %>% 
+  mutate(newbezirksname = ifelse(bezirksname == "Hohenschönhausen", "Lichtenberg", newbezirksname)) %>% 
+  mutate(newbezirksname = ifelse(bezirksname == "Weißensee"|bezirksname == "Prenzlauer Berg", "Pankow", newbezirksname)) %>% 
+  mutate(newbezirksname = ifelse(bezirksname == "Tiergarten"|bezirksname == "Wedding", "Mitte", newbezirksname)) %>% 
+  mutate(bezirksname = newbezirksname) %>% 
+  select(-newbezirksname)
+
+# Säubern des Datensatzes 1999
+data_bvv_1999 <- data_bvv_1999 %>% 
+  mutate(newbezirksname = bezirksname) %>% 
+  mutate(newbezirksname = ifelse(bezirksname == "Hellersdorf"|bezirksname == "Marzahn", "Marzahn-Hellersdorf", newbezirksname)) %>% 
+  mutate(newbezirksname = ifelse(bezirksname == "Friedrichshain"|bezirksname == "Kreuzberg", "Friedrichshain-Kreuzberg", newbezirksname)) %>% 
+  mutate(newbezirksname = ifelse(bezirksname == "Charlottenburg"|bezirksname == "Wilmersdorf", "Charlottenburg-Wilmersdorf", newbezirksname)) %>% 
+  mutate(newbezirksname = ifelse(bezirksname == "Köpenick"|bezirksname == "Treptow", "Treptow-Köpenick", newbezirksname)) %>% 
+  mutate(newbezirksname = ifelse(bezirksname == "Steglitz"|bezirksname == "Zehlendorf", "Steglitz-Zehlendorf", newbezirksname)) %>% 
+  mutate(newbezirksname = ifelse(bezirksname == "Schöneberg"|bezirksname == "Tempelhof", "Tempelhof-Schöneberg", newbezirksname)) %>% 
+  mutate(newbezirksname = ifelse(bezirksname == "Hohenschönhausen", "Lichtenberg", newbezirksname)) %>% 
+  mutate(newbezirksname = ifelse(bezirksname == "Weißensee"|bezirksname == "Prenzlauer Berg", "Pankow", newbezirksname)) %>% 
+  mutate(newbezirksname = ifelse(bezirksname == "Tiergarten"|bezirksname == "Wedding", "Mitte", newbezirksname)) %>% 
+  mutate(bezirksname = newbezirksname) %>% 
+  select(-newbezirksname)
+
+# Säubern des Datensatzes 2016
+data_bvv_2016 <- data_bvv_2016 %>% 
+  rename(ost_west = berlin_ost_west) %>% 
+  rename(bundestagswahlkreis = bundestags_wahlkreis) %>% 
+  rename(abgeordnetenhauswahlkreis = abgeordneten_hauswahlkreis) %>% 
+  select(-adresse) %>% 
+  mutate(abgeordnetenhauswahlkreis = paste0("0",str_sub(wahlbezirk, 1,1)))
+
+# Zusammenfassung der Datensätze
+df_wahlen<- rbind(data_bvv_1995, data_bvv_1999, data_bvv_2001, data_bvv_2006, data_bvv_2011, data_bvv_2016)
+rm(data_bvv_1995, data_bvv_1999, data_bvv_2001, data_bvv_2006, data_bvv_2011, data_bvv_2016, startnumber, jahr, i, excelfiles, data)
+
+```
+
+
+```{r Read geodata, include=FALSE}
+# Reading Wahlbezirke 
+geo_wahlbezirke = st_read("geo/UWB.shp") %>% mutate(wb = paste0(BEZ, UWB))
+
+# Reading LOR
+geo_lor = st_read("geo/lor/LOR_Planungsräume__Berlin.shp") %>% 
+  st_transform(., 25833) %>%  # Setting the correct crs as the objekt wahlbezirke
+  rename(RAUMID = spatial_na)
+
+# Reading Wohndauerdata from https://daten.berlin.de/datensaetze/einwohnerinnen-und-einwohner-berlin-lor-planungsr%C3%A4umen-nach-wohndauer-am-31122019 
+df_wohndauer <- read_csv2("data/WHNDAUER2019_Matrix.csv") %>% 
+  select(RAUMID, PDAU10, PDAU5)
+
+# Read Demographische Daten pro LOR
+df_demographie  <- readr::read_csv2("data/EWR201912E_Matrix.csv") %>% 
+  select(-c(E_E,E_EM,E_EW, BEZ, PGR, BZR, PLR, STADTRAUM, ZEIT, E_EU1, E_E1U6, E_E6U15, E_E15U18, E_E18U25, E_E25U55, E_E55U65, E_E65U80, E_E80U110 )) %>% 
+  pivot_longer(cols = starts_with("E_")) %>% 
+  separate(name, c(NA, NA, "number"), sep = "E") %>% 
+  separate(number, c("min", "max")) %>% 
+  mutate(max = as.numeric(max)) %>% 
+  mutate(min = as.numeric(min)) %>% 
+  mutate(alter = (min + max)/2) %>% 
+  mutate(gewicht = alter * value) %>% 
+  group_by(RAUMID) %>% 
+  summarise(Altersmittelwert = sum(gewicht)/sum(value))  
+  
+  
+# Read Kernindikator Soziale Ungerechtigkeit des Umweltgerechtigkeitsatlases
+df_sozstatus <- readxl::read_xls("data/Umweltgerechtigkeit Kernindikator Soziale Problematik.xls") %>% 
+  select(RAUMID = `Planungsraum-Nummer`, Statusindex, Dynamikindex) %>% 
+  mutate(Statusindex = as.numeric(factor(Statusindex, levels = c("sehr niedrig", "niedrig", "mittel", "hoch")))) %>% 
+  mutate(Dynamikindex = as.numeric(factor(Dynamikindex, levels = c("negativ", "stabil", "positiv"))))
+
+
+```
+
+```{r}
+# Putting all datasets together
+# Combine LOR and Wohndauer an aggregate incongruent data
+df1 <- geo_lor %>% 
+  left_join(df_wohndauer, by = "RAUMID") %>% 
+  left_join(df_demographie, by = "RAUMID") %>%  
+  left_join(df_sozstatus, by = "RAUMID") 
+
+# df2 = st_interpolate_aw(df1[, c("PDAU10", "PDAU5", "Altersmittelwert", "Statusindex", "Dynamikindex")], geo_wahlbezirke, extensive = FALSE) 
+
+# df_geo <- st_join(df2, wahlbezirke, join = st_equals)
+```
+
+
+### Grüne BVV-Wahlergebnisse pro Bezirk (absolut)
+```{r, "Berlin_absolut"}
+df_wahlen %>% 
+  filter(Parteien == "grune") %>% # Hier erfolgt die Filterung nach der Partei "Die Grünen"
+  filter(stimmart == "BVV") %>% # Hier erfolgt die Filterung nach der Wahlart
+  group_by(year, bezirksname) %>% 
+  summarise(anzahl = sum(Stimmen), .groups = 'drop') %>% # Hier erfolgt die Berechnung in diesem Fall das simple zusammenzählen
+  pivot_wider(names_from = bezirksname, values_from = anzahl) -> # xts braucht einen "breiten" Datensatz
+  df 
+
+dfts <- xts::xts(x = df, order.by = df$year) # Umwandlung in einen xts-Datensatz, der für Dygraph gebraucht wird
+dfts$year <- NULL # Die Variable "Year" wird entfernt
+
+# Hierdurch wird die Grafik erstellt
+dygraph(dfts, main = "Grüne BVV-Wahlergebnisse pro Bezirk (absolut)") %>% 
+  dyAxis("y", "Grüne Stimmen") %>% # Beschriftung der Y-Achse
+  dyOptions(axisLineWidth = 1.5, drawGrid = FALSE) %>% 
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) -> 
+  d1 
+
+# Zur Darstellung der Legende der gehooverten Variable sind diese Zeilen notwendig
+d1$x$css = "
+.dygraph-legend > span {display:none;}
+.dygraph-legend > span.highlight { display: inline; }
+"
+d1 # Anzeige des Graphen
+```
+
+### Grüne BVV-Wahlergebnisse pro Bezirk (in Prozent)
+
+```{r, "Berlin_relativ"}
+# Kommentare siehe obigen chunk
+df_wahlen %>% 
+  filter(Parteien == "grune") %>% 
+  filter(stimmart == "BVV") %>% # Hier erfolgt die Filterung nach der Wahlart
+  group_by(year, bezirksname) %>% 
+  summarise(anzahl = 100*sum(Stimmen)/sum(gultige_stimmen), .groups = 'drop') %>% 
+  pivot_wider(names_from = bezirksname, values_from = anzahl) ->
+  df
+dfts <- xts::xts(x = df, order.by = df$year) 
+dfts$year <- NULL
+dygraph(dfts, main = "Grüne BVV-Wahlergebnisse pro Bezirk (in Prozent)") %>% 
+  dyAxis("y", "Grüne Stimmen in % aller gültigen Stimmen") %>% 
+  dyOptions(axisLineWidth = 1.5, drawGrid = FALSE) %>% 
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) -> d1
+d1$x$css = "
+.dygraph-legend > span {display:none;}
+.dygraph-legend > span.highlight { display: inline; }
+"
+d1
+```
+
+### Pankower Grüne BVV-Wahlergebnisse nach Abgeordnetenhauswahlkreis (absolut)
+```{r, "Pankow_absolut"}
+# Kommentare siehe obigen chunk
+df <- df_wahlen %>% 
+  filter(Parteien == "grune") %>% 
+  filter(stimmart == "BVV") %>% # Hier erfolgt die Filterung nach der Wahlart
+  filter(bezirksname == "Pankow") %>% 
+  filter(year > as.Date("01-01-2005", format="%d-%m-%Y"),) %>% 
+  group_by(year, abgeordnetenhauswahlkreis) %>% 
+  summarise(anzahl = sum(Stimmen), .groups = 'drop') %>% 
+  pivot_wider(names_from = abgeordnetenhauswahlkreis, values_from = anzahl)
+dfts <- xts::xts(x = df, order.by = df$year) 
+dfts$year <- NULL
+dygraph(dfts, main = "Pankower Grüne BVV-Wahlergebnisse nach Abgeordnetenhauswahlkreis (absolut)") %>% 
+  dyAxis("y", "Grüne Stimmen") %>% 
+  dyOptions(axisLineWidth = 1.5, drawGrid = FALSE) %>% 
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) -> d1
+d1$x$css = "
+.dygraph-legend > span {display:none;}
+.dygraph-legend > span.highlight { display: inline; }
+"
+d1
+```
+
+
+### Pankower Grüne BVV-Wahlergebnisse nach Abgeordnetenhauswahlkreis (in Prozent)
+```{r, "Pankow relativ"}
+# Kommentare siehe obigen chunk
+df <- df_wahlen %>% 
+  filter(Parteien == "grune") %>% 
+  filter(bezirksname == "Pankow") %>% 
+  filter(stimmart == "BVV") %>% # Hier erfolgt die Filterung nach der Wahlart
+  filter(year > as.Date("01-01-2005", format="%d-%m-%Y")) %>% 
+  group_by(year, abgeordnetenhauswahlkreis) %>% 
+  summarise(anzahl = 100*sum(Stimmen)/sum(gultige_stimmen), .groups = 'drop') %>% 
+  pivot_wider(names_from = abgeordnetenhauswahlkreis, values_from = anzahl)
+dfts <- xts::xts(x = df, order.by = df$year) 
+dfts$year <- NULL
+dygraph(dfts, main = "Pankower Grüne BVV-Wahlergebnisse nach Abgeordnetenhauswahlkreis (in Prozent)") %>% 
+  dyAxis("y", "Grüne Stimmen in % aller gültigen Stimmen") %>% 
+  dyOptions(axisLineWidth = 1.5, drawGrid = FALSE) %>% 
+  dyHighlight(highlightSeriesOpts = list(strokeWidth = 3)) -> d1
+d1$x$css = "
+.dygraph-legend > span {display:none;}
+.dygraph-legend > span.highlight { display: inline; }
+"
+d1
+```
+
+
+
+### Pankower Grüne BVV-Wahlergebnisse nach Wahlbezirk und Abgeordnetenhauswahlkreis (in Prozent)
+```{r, "Pankow wahlbezirk relativ"}
+# Kommentare siehe obigen chunk
+
+df <- df_wahlen %>% 
+  filter(Parteien == "grune") %>% 
+  filter(stimmart == "BVV") %>% # Hier erfolgt die Filterung nach der Wahlart
+  filter(bezirksname == "Pankow") %>% 
+  filter(year > as.Date("01-01-2010", format="%d-%m-%Y")) %>% 
+  group_by(year, wahlbezirk, abgeordnetenhauswahlkreis) %>% 
+  summarise(anzahl = 100*sum(Stimmen)/sum(gultige_stimmen), .groups = 'drop') 
+
+# ggplotly(ggplot(df %>% filter(abgeordnetenhauswahlkreis == "03"), aes(year, anzahl), tooltip="wahlbezirk") + geom_line(aes(color = wahlbezirk)))
+
+ggplotly(ggplot(df, aes(year, anzahl)) + 
+           geom_line(aes(color = wahlbezirk)) + 
+           facet_wrap(vars(abgeordnetenhauswahlkreis)) + 
+           theme(legend.position = "bottom") +
+           theme_classic() +
+           labs( y = "Prozent", x = "", title = "Pankower Grüne BVV-Wahlergebnisse nach Wahlbezirk und Abgeordnetenhauswahlkreis (Den Wahlbezirk herausfinden? Auf der linken oder rechten Seite jeder Grafik mit der Maus über die Linien fahren)" )
+)
+
+                                                                                 
+
+
+
+```
+
+### Karte der Wahlbezirke in Pankow
+```{r, Karte, message=FALSE}
+percentagedata <- data_bvv_2016 %>% 
+  filter(Parteien == "grune") %>% 
+  group_by(wahlbezirk) %>% 
+  summarise(Prozent_2016 = round(100*sum(Stimmen)/sum(gultige_stimmen),1), .groups = 'drop') %>% 
+  rename(UWB = wahlbezirk)
+
+# Read Shapefile
+wahlkreise <- st_read("geo/UWB.shp", quiet = TRUE) %>% filter(BEZ == "03") %>% left_join(percentagedata) %>% rename(Wahlbezirk = UWB)
+  
+ggplotly(
+ggplot(wahlkreise) +
+  geom_sf(aes(color = Wahlbezirk, fill = Prozent_2016)) +
+  theme_void() +
+  theme(legend.position = "none") + 
+  scale_fill_continuous(name = "", low = "#ccffcc", high = "darkgreen") +
+  scale_color_discrete("black")
+)
+```
+### Karte der Wahlbezirke in Pankow / Differenz erststimme & Zweitstimme
+
+### Differenz Zweitstimme minus Erststimme
+```{r, "Differenz_zweit_erst"}
+df <- df_wahlen %>% 
+  filter(Parteien == "grune") %>% 
+  filter(bezirksname == "Pankow") %>% 
+  filter(year > as.Date("01-01-2010", format="%d-%m-%Y")) %>% 
+  group_by(year, abgeordnetenhauswahlkreis, wahlbezirk, stimmart) %>% 
+  summarise(prozent = 100*sum(Stimmen)/sum(gultige_stimmen), .groups = 'drop') %>% 
+  pivot_wider(names_from = stimmart, values_from = prozent) %>% 
+  mutate(differenz_1_2 = Zweitstimme - Erststimme) %>% 
+  mutate(differenz_2_bvv = Zweitstimme - BVV)
+
+ggplotly(ggplot(df, aes(x = wahlbezirk, y = differenz_1_2, fill = abgeordnetenhauswahlkreis)) + 
+           geom_bar(stat = "identity") +
+           facet_wrap(. ~ year) +
+           theme_void()
+         )
+
+```
+
+
+
+### Differenz Zweitstimme minus Erststimme AGH-Wahl
+
+```{r, Karte, message=FALSE}
+
+percentagedata2 <- df %>% 
+  filter(year == as.Date("01-01-2016", format="%d-%m-%Y")) %>% 
+  rename(UWB = wahlbezirk)
+
+# Read Shapefile
+wahlkreise <- st_read("geo/UWB.shp", quiet = TRUE) %>% filter(BEZ == "03") %>% left_join(percentagedata2) %>% rename(Wahlbezirk = UWB)
+  
+ggplotly(
+ggplot(wahlkreise) +
+  geom_sf(aes(color = Wahlbezirk, fill = differenz_1_2)) +
+  theme_void() +
+  theme(legend.position = "none") + 
+  scale_fill_continuous(name = "", low = "#ccffcc", high = "darkgreen") +
+  scale_color_discrete("black")
+)
+```
+
+
+
+### Differenz Zweistimme minus BVV-Stimmen
+```{r}
+ggplotly(ggplot(df, aes(x = wahlbezirk, y = differenz_2_bvv, fill = abgeordnetenhauswahlkreis)) + 
+           geom_bar(stat = "identity") +
+           facet_wrap(. ~ year) +
+           theme_void()
+         )
+```
+
+
+```{r}
+library(skimr)
+# Correlation
+
+df_wahlen %>% 
+  filter(Parteien == "grune") %>% 
+  filter(stimmart == "BVV") %>% # Hier erfolgt die Filterung nach der Wahlart
+  filter(year > as.Date("01-01-2015", format="%d-%m-%Y")) %>% 
+  filter(wahlbezirksart == "Urnenwahlbezirk") %>% 
+  mutate(wb = paste0(bezirksnummer, wahlbezirk)) %>% 
+  group_by(wb) %>% 
+  summarise(wahlergebnis = 100*sum(Stimmen)/sum(gultige_stimmen), .groups = 'drop') %>% 
+  left_join(df_geo, by = "wb") -> 
+  df
+
+korrelationskoeffizent = df %>% summarize(correlation = cor(wahlergebnis, Altersmittelwert)) %>% pull() %>% round(digits = 2)
+
+ggplot(df, aes(x = Altersmittelwert, y = wahlergebnis)) +
+  geom_jitter(aes(color = wahlergebnis)) +
+  scale_color_continuous(low = "lightgreen",  high = "darkgreen") +
+  labs(x = "Altersmittelwert der Wahlbezirke", y = "Wahlergebnis Grüne BVV 2016 in %", title = "Wahlergebnisse der Berliner Grünen zur BVV-Wahl 2016 \n nach Altersmittelwert pro Wahlbezirk (ohne Briefwahl)") +  
+  geom_smooth(method = "lm", se = TRUE) +
+  theme_classic() +
+  theme(legend.position = "none") +
+  annotate("text", x = 55, y = 40, label = paste("Korrelations-Koeff:", korrelationskoeffizent))
+
+
+
+
+ggplot(df, aes(x = PDAU5, y = wahlergebnis)) +
+    geom_jitter() +
+    labs(x = "Alter", y = "Wahlergebnis", title = "Wahl nach Alter") +  
+    geom_smooth(method = "lm", se = TRUE)
+
+  
+formel = df$wahlergebnis ~ df$Altersmittelwert + df$PDAU10 + df$Statusindex + df$Dynamikindex
+
+summary(glm(formula = formel, family = gaussian()))
+
+```
+
+
+
+### Erläuterungen
+
+#### Ziel
+Diese Darstellung dient dem Aufdecken von Trends bei den Wahlergebnissen der Pankower Grünen. Die angezeigten Graphen sind prinzipiell erweiterbar um andere Wahlergebnisse z.B. der Wahlen zu Abgeordnetenhaus. 
+
+#### Darstellung
+Wahlergebnisse der Partei "Die Grünen" in den Wahlen zur Bezirksverordnetenversammlung zwischen 1995 und 2016 in Berlin. Die Darstellung erfolgt in absoluten und in relativen Zahlen (in %). 
+
+#### Datenquelle
+Alle Daten entstammen dem Landesamt für Statistik Berlin-Brandenburg. Die Daten wurden im März 2021 von der Seite [wahlen-berlin.de](https://www.wahlen-berlin.de/Historie/hist_Wahlen.asp) heruntergeladen
+
+#### Karten
+Die Kartendateien (Shape-Files) sind von der Seite [Open-Data Berlin](https://daten.berlin.de/datensaetze/geometrien-der-wahlbezirke-f%C3%BCr-die-wahl-zum-abgeordnetenhaus-von-berlin-und-zu-den-0) 
+
+#### Methoden
+Die Daten wurden verarbeitet mit R. Die Darstellung erfolgt durch ein [Flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/index.html). Die Zahlen wurden nach bestem Wissen und Gewissen geprüft - Fehler sind aber selbstverständlich möglich. Die genaue Berechnung ist aus dem Source-Code zu entnehmen (oben rechts).
+
+#### Limitationen
+Am problematischsten ist die Darstellung der Wahlbezirke und der Abgeordnetenwahlkreise innerhalb Pankows. Den frei verfügbaren Informationen im Netz ist die Änderung der Wahlkreise nicht exakt und maschinenlesbar zu entnehmen. Deswegen erfolgt hier nur die Darstellung der letzten zwei Wahlen.
+
