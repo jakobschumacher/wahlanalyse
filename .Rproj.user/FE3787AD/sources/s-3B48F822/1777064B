@@ -3,7 +3,7 @@
     "path": "~/Dokumente/03_Projekte/2021_05_20_Wahlergebnisse_bookdown/index.Rmd",
     "project_path": "index.Rmd",
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "4034927453",
     "contents": "",
     "dirty": false,
     "created": 1621526338919.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "15,9",
+        "cursorPosition": "9,18",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1621685859,
+    "lastKnownWriteTime": 1621787826,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1621685859436,
+    "last_content_update": 1621787826086,
     "read_only": false,
     "read_only_alternatives": []
 }
