@@ -2,6 +2,7 @@ book_filename: "2021_05_20_Wahlergebnisse_bookdown"
 delete_merged_file: true
 new_session: false
 output_dir: "docs"
+before_chapter_script: "R/before_chapter_script.R"
 language:
   ui:
     chapter_name: "Kapitel "
