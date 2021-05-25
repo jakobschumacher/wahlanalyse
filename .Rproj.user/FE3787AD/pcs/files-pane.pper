@@ -2,8 +2,8 @@
     "sortOrder": [
         {
             "columnIndex": 2,
-            "ascending": true
+            "ascending": false
         }
     ],
-    "path": "~/Dokumente/03_Projekte/2021_05_20_Wahlergebnisse_bookdown"
+    "path": "~/Dokumente/03_Projekte/2021_05_20_Wahlergebnisse_bookdown/R"
 }
