@@ -1,6 +1,6 @@
 --- 
 title: "Wahlergebnisse der Berliner Grünen"
-author: "Jakob Schumacher, Julius Oblong"
+author: "Jakob Schumacher, Julius Oblong, Daniel Freudl"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -8,24 +8,73 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 description: "Diese Darstellung dient dem Aufdecken von Trends bei den Wahlergebnissen der Berliner Grünen mit einem Fokus auf Pankow."
+output:
+  bookdown::html_book:
+    includes:
+      in_header: style.css
 ---
-
 
 # Einleitung
 
 ![Partei Logo](https://www.gruene-hessen.de/werkzeugkasten/wp-content/themes/hessengruen/images/vorschaubild.jpg){width=20%} 
 
-## Ziel
-Diese Darstellung dient dem Aufdecken von Trends bei den Wahlergebnissen der Pankower Grünen. Die angezeigten Graphen sind prinzipiell erweiterbar um andere Wahlergebnisse z.B. der Wahlen zu Abgeordnetenhaus. 
 
-## Datenquelle
-Alle Daten entstammen dem Landesamt für Statistik Berlin-Brandenburg. Die Daten wurden im März 2021 von der Seite [wahlen-berlin.de](https://www.wahlen-berlin.de/Historie/hist_Wahlen.asp) heruntergeladen
 
-## Karten
-Die Kartendateien (Shape-Files) sind von der Seite [Open-Data Berlin](https://daten.berlin.de/datensaetze/geometrien-der-wahlbezirke-f%C3%BCr-die-wahl-zum-abgeordnetenhaus-von-berlin-und-zu-den-0) 
+## Was soll diese Webseite?
+Wir wollen grüne Ideen umsetzen. Dazu müssen wir stärkste Kraft werden. DAs beudeutet wir müssen Wahlen gewinnen und uns für die Wählenden einsetzen. Die Analyse von alten Wahlen und die räumliche Verteilung ermöglichen es Zusammenhänge besser einordnen zu können. Diese Darstellung dienen dem Aufdecken von Trends und Zusammenhängen. Der Fokus dieser Analyse liegt auf den Wahlergebnissen der Pankower Grünen - wobei dies problemlos auch auf andere Bezirke ausweitbar wäre. 
 
-## Methoden
-Die Daten wurden verarbeitet mit R. Die Darstellung erfolgt durch ein [Flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/index.html). Die Zahlen wurden nach bestem Wissen und Gewissen geprüft - Fehler sind aber selbstverständlich möglich. Die genaue Berechnung ist aus dem Source-Code zu entnehmen (oben rechts).
+Eine Analyse und Darstellung von Wahldaten ist kein Heilsbringer. Wahlkampf ist immer auch gefährdet sich manipulativer Elemente zu bedienen. Dem stellen wir uns entschieden dagegen. Unser Ziel ist es Menschen von unseren Ideen für die Zukunft zu überzeugen. Hier kann es uns helfen, wenn wir als Wahlkämpfer Zusammenhänge besser verstehen.
 
-## Limitationen
-Am problematischsten ist die Darstellung der Wahlbezirke und der Abgeordnetenwahlkreise innerhalb Pankows. Den frei verfügbaren Informationen im Netz ist die Änderung der Wahlkreise nicht exakt und maschinenlesbar zu entnehmen. Deswegen erfolgt hier nur die Darstellung der letzten zwei Wahlen.
+## Wie ist diese Webseite zu benutzen?
+Vor einer Wahlkampfaktion kann man sich anschauen, auf welche Wahlbezirke man bei der Aktion zielt. Dann kann man sich die Daten und Zusammenhänge für diesen Wahlbezirk auf dieser Webseite anschauen. Die Grafiken können dadurch bei der strategiesche Ausrichtung helfen. Zum Beispiel werden die Fragen aus einem eher extremistischen Wahlbezirk (viele AFD und Linkswähler) anders sein als in einem eher konservativ geprägten Bezirk (CDU-Wähler, älter, kirchlicher).
+
+## Was ist auf der Seite zu finden?
+Die Seite hat die Strategie möglichst gut sortierte und erklärte Aufbereitungen zu zeigen. Dadurch wird den Wahlkämpfenden der drei Ebenen (BVV, AGH, Bundestag) die Möglichkeit gegeben sich die von Ihnen gewünschten Daten anzeigen zu lassen. Diese Vorgehensweise beinhaltet im Gegenzug die Schwierigkeit, das die betrachtende Person selber einschätzen muss, was relevant ist und was nicht. Das ist schwierig. Leider gibt es keine Möglichkeit für alle im Wahlkampf nur die relevanten Daten anzuzeigen (oder wir kennen sie nicht) 
+
+Die Inhalte teilen sich grob in die folgenden drei Gruppen auf:
+* Graphische Aufbereitung von vergangenen Wahlen, als Karten und als Verlaufsdaten
+* Zusammenhänge von Wahlergebnissen und soziologischen Kennzahlen pro Wahlbezirk
+* Eine Potentialanalyse 
+
+## Worin unterscheidet sich diese Seite von der Darstellung im Grünen Netz?
+* Die Darstellung ist nach den Wünschen der Pankower Grünen formbar
+* Diese Webseite kann Daten "umrechnen", die aus anderen räumlichen Zusammenhängen außerhalb der Strukturdaten bekannt sind. 
+
+## Wie wurden diese Daten erstellt?
+* Korrelationsdaten: Daten zu Lebensweltlich Orientierten Räumen (LOR) wurden umgerechnet auf die Wahlbezirke, dies erfolgt anhand der Überlappung (R-Befehl "aw_interpolate"). 
+* Die Korrelation erfolgt durch die Pearson-Methode (R-Befehl "cor"). 
+* "Wobble-Bezirke" sind Bezirke mit einer großen Schwankungsbreite zwischen den Wahlergebnissen. Dies wurde berechnet mit dem Variationskoeffizient (R-Befehl  100 * sd() / mean()). 
+* Die anderen Daten sind zumeist eine einfache Darstellung. 
+* Die Daten wurden verarbeitet mit R. Die wichtigsten benutze Pakete sind tidyverse, tmap, sf, areal. Die Darstellung erfolgt durch bookdown. Die Veröffentlichung erfolgt auf Github. 
+* Die genaue Berechnung ist reproduzierbar - der Source-Code ist dem Repository bei Github zu entnehmen.
+
+
+## Welche Limitationen gibt es?
+### Limitation 1{-#fehler}
+Die Daten sind nicht auf wissenschaftlichen Niveau. Fehler in der Berechnung sind also durchaus wahrscheinlich, auch wenn wir versuchen diese zu vermeiden. Wir versuchen die Unsicherheiten transparaent aufzuzeigen, so weit uns das bekannt ist.
+
+### Limitation 2{-#scheinkausalitaet}
+Korrelation sind nicht Kausalität. Dinge die miteinander einhergehen, müssen sich nicht gegenseitig bedingen. Dies betrifft insbesondere die Zusammenhänge von Wahlergebnissen mit Kennzahlen. Beispiel: "Je mehr Jogger unterwegs sind, desto höher sind die Wohnungspreise." Zum genaueren Nachlesen siehe [Wikipedia-Artikel zur Scheinkausalität](https://de.wikipedia.org/wiki/Cum_hoc_ergo_propter_hoc)
+
+### Limitaiton 3{-#potential}
+Die Potentialanalyse ist rudimentär. Ohne eine tiefergehende wissenschaftliche Untersuchung ist es nicht möglich Potentiale genau vorherzusagen. Von der Bundesebene gibt es ebenfalls eine Potentialanalyse - noch ist uns unbekannt worauf diese beruht.
+
+### Limitaiton 4{-#fehlendgeom}
+Die Geometrien liegen nicht für alle Wahlen vor. Wahlbezirke, die zwischen 2011 und heute eine Änderung erfahren haben sind also verfälscht in den Trends und den kartographischen Darstellungen. 
+
+### Limitaiton 5{-#umrechnung}
+Die Umrechnung von Daten aus anderen räumlichen Zusammenhängen auf die Wahlbezirke ist mit einem Zuwachs an Ungenauigkeit versehen.
+
+### Limitaiton 6{-#breifwahl}
+Alle Daten, die sich auf einen Wahlbezirk beziehen beinhalten nicht die Briefwahldaten
+
+## Woher kommen die Daten
+Alle Daten entstammen auf die ein oder andere Art und Weise dem Landesamt für Statistik Berlin-Brandenburg. 
+
+Wahlergebnisse und Strukturdaten
+* [wahlen-berlin.de](https://www.wahlen-berlin.de/Historie/hist_Wahlen.asp) 
+
+Daten zu den Lebensweltlich orientierten Räumen und Wahlgeometrien
+* [daten.berlin.de/](https://daten.berlin.de/)
+
+

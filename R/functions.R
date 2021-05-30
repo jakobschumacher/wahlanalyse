@@ -82,7 +82,7 @@ read_wahlenberlin <- function(quelle, wahlart, datenname, forcereload = FALSE) {
     
     
     data <- data %>% 
-      select(wahlbezirk, bezirksname, bezirksnummer, partei, stimmen, gultige_stimmen, jahr, stimmart, wahlbezirksart )
+      select(wahlbezirk, bezirksname, bezirksnummer, partei, stimmen, wahlberechtigte_insgesamt, gultige_stimmen, jahr, stimmart, wahlbezirksart )
     
     
     data <- data %>% 

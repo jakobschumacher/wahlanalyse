@@ -1,7 +1,15 @@
 h1:einleitung Einleitung
-h2:ziel Ziel
-h2:datenquelle Datenquelle
-h2:karten Karten
-h2:methoden Methoden
-h2:limitationen Limitationen
+h2:was-soll-diese-webseite Was soll diese Webseite?
+h2:wie-ist-diese-webseite-zu-benutzen Wie ist diese Webseite zu benutzen?
+h2:was-ist-auf-der-seite-zu-finden Was ist auf der Seite zu finden?
+h2:worin-unterscheidet-sich-diese-seite-von-der-darstellung-im-grünen-netz Worin unterscheidet sich diese Seite von der Darstellung im Grünen Netz?
+h2:wie-wurden-diese-daten-erstellt Wie wurden diese Daten erstellt?
+h2:welche-limitationen-gibt-es Welche Limitationen gibt es?
+h3:fehler Limitation 1
+h3:scheinkausalitaet Limitation 2
+h3:potential Limitaiton 3
+h3:fehlendgeom Limitaiton 4
+h3:umrechnung Limitaiton 5
+h3:breifwahl Limitaiton 6
+h2:woher-kommen-die-daten Woher kommen die Daten
 

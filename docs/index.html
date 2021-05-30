@@ -21,10 +21,10 @@
   <meta name="twitter:description" content="Diese Darstellung dient dem Aufdecken von Trends bei den Wahlergebnissen der Berliner Grünen mit einem Fokus auf Pankow." />
   
 
-<meta name="author" content="Jakob Schumacher, Julius Oblong" />
+<meta name="author" content="Jakob Schumacher, Julius Oblong, Daniel Freudl" />
 
 
-<meta name="date" content="2021-05-25" />
+<meta name="date" content="2021-05-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,16 +53,6 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/proj4-2.6.2/proj4.min.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.0.4.1/leaflet-providers-plugin.js"></script>
 
 
 
@@ -85,11 +75,21 @@
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Einleitung</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#ziel"><i class="fa fa-check"></i><b>1.1</b> Ziel</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#datenquelle"><i class="fa fa-check"></i><b>1.2</b> Datenquelle</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#karten"><i class="fa fa-check"></i><b>1.3</b> Karten</a></li>
-<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#methoden"><i class="fa fa-check"></i><b>1.4</b> Methoden</a></li>
-<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#limitationen"><i class="fa fa-check"></i><b>1.5</b> Limitationen</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#was-soll-diese-webseite"><i class="fa fa-check"></i><b>1.1</b> Was soll diese Webseite?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#wie-ist-diese-webseite-zu-benutzen"><i class="fa fa-check"></i><b>1.2</b> Wie ist diese Webseite zu benutzen?</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#was-ist-auf-der-seite-zu-finden"><i class="fa fa-check"></i><b>1.3</b> Was ist auf der Seite zu finden?</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#worin-unterscheidet-sich-diese-seite-von-der-darstellung-im-grünen-netz"><i class="fa fa-check"></i><b>1.4</b> Worin unterscheidet sich diese Seite von der Darstellung im Grünen Netz?</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#wie-wurden-diese-daten-erstellt"><i class="fa fa-check"></i><b>1.5</b> Wie wurden diese Daten erstellt?</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#welche-limitationen-gibt-es"><i class="fa fa-check"></i><b>1.6</b> Welche Limitationen gibt es?</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#fehler"><i class="fa fa-check"></i>Limitation 1</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#scheinkausalitaet"><i class="fa fa-check"></i>Limitation 2</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#potential"><i class="fa fa-check"></i>Limitaiton 3</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#fehlendgeom"><i class="fa fa-check"></i>Limitaiton 4</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#umrechnung"><i class="fa fa-check"></i>Limitaiton 5</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#breifwahl"><i class="fa fa-check"></i>Limitaiton 6</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#woher-kommen-die-daten"><i class="fa fa-check"></i><b>1.7</b> Woher kommen die Daten</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="wahlkarten.html"><a href="wahlkarten.html"><i class="fa fa-check"></i><b>2</b> Wahlkarten</a>
 <ul>
@@ -112,197 +112,7 @@
 <li class="chapter" data-level="3" data-path="zeitverläufe.html"><a href="zeitverläufe.html"><i class="fa fa-check"></i><b>3</b> Zeitverläufe</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="zeitverläufe.html"><a href="zeitverläufe.html#entwicklung-der-wahlergebnisse-der-großen-parteien-in-pankow-2009-bis-2019"><i class="fa fa-check"></i><b>3.1</b> Entwicklung der Wahlergebnisse der großen Parteien in Pankow 2009 bis 2019</a></li>
-<li class="chapter" data-level="3.2" data-path="zeitverläufe.html"><a href="zeitverläufe.html#zeitverläufe-pro-pankower-wahlbezirk"><i class="fa fa-check"></i><b>3.2</b> Zeitverläufe pro Pankower Wahlbezirk</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03101"><i class="fa fa-check"></i><b>3.2.1</b> Wahlbezirk: 03101</a></li>
-<li class="chapter" data-level="3.2.2" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03102"><i class="fa fa-check"></i><b>3.2.2</b> Wahlbezirk: 03102</a></li>
-<li class="chapter" data-level="3.2.3" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03103"><i class="fa fa-check"></i><b>3.2.3</b> Wahlbezirk: 03103</a></li>
-<li class="chapter" data-level="3.2.4" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03104"><i class="fa fa-check"></i><b>3.2.4</b> Wahlbezirk: 03104</a></li>
-<li class="chapter" data-level="3.2.5" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03105"><i class="fa fa-check"></i><b>3.2.5</b> Wahlbezirk: 03105</a></li>
-<li class="chapter" data-level="3.2.6" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03106"><i class="fa fa-check"></i><b>3.2.6</b> Wahlbezirk: 03106</a></li>
-<li class="chapter" data-level="3.2.7" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03107"><i class="fa fa-check"></i><b>3.2.7</b> Wahlbezirk: 03107</a></li>
-<li class="chapter" data-level="3.2.8" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03108"><i class="fa fa-check"></i><b>3.2.8</b> Wahlbezirk: 03108</a></li>
-<li class="chapter" data-level="3.2.9" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03109"><i class="fa fa-check"></i><b>3.2.9</b> Wahlbezirk: 03109</a></li>
-<li class="chapter" data-level="3.2.10" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03110"><i class="fa fa-check"></i><b>3.2.10</b> Wahlbezirk: 03110</a></li>
-<li class="chapter" data-level="3.2.11" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03111"><i class="fa fa-check"></i><b>3.2.11</b> Wahlbezirk: 03111</a></li>
-<li class="chapter" data-level="3.2.12" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03112"><i class="fa fa-check"></i><b>3.2.12</b> Wahlbezirk: 03112</a></li>
-<li class="chapter" data-level="3.2.13" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03113"><i class="fa fa-check"></i><b>3.2.13</b> Wahlbezirk: 03113</a></li>
-<li class="chapter" data-level="3.2.14" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03114"><i class="fa fa-check"></i><b>3.2.14</b> Wahlbezirk: 03114</a></li>
-<li class="chapter" data-level="3.2.15" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03115"><i class="fa fa-check"></i><b>3.2.15</b> Wahlbezirk: 03115</a></li>
-<li class="chapter" data-level="3.2.16" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03116"><i class="fa fa-check"></i><b>3.2.16</b> Wahlbezirk: 03116</a></li>
-<li class="chapter" data-level="3.2.17" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03117"><i class="fa fa-check"></i><b>3.2.17</b> Wahlbezirk: 03117</a></li>
-<li class="chapter" data-level="3.2.18" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03118"><i class="fa fa-check"></i><b>3.2.18</b> Wahlbezirk: 03118</a></li>
-<li class="chapter" data-level="3.2.19" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03201"><i class="fa fa-check"></i><b>3.2.19</b> Wahlbezirk: 03201</a></li>
-<li class="chapter" data-level="3.2.20" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03202"><i class="fa fa-check"></i><b>3.2.20</b> Wahlbezirk: 03202</a></li>
-<li class="chapter" data-level="3.2.21" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03203"><i class="fa fa-check"></i><b>3.2.21</b> Wahlbezirk: 03203</a></li>
-<li class="chapter" data-level="3.2.22" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03204"><i class="fa fa-check"></i><b>3.2.22</b> Wahlbezirk: 03204</a></li>
-<li class="chapter" data-level="3.2.23" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03205"><i class="fa fa-check"></i><b>3.2.23</b> Wahlbezirk: 03205</a></li>
-<li class="chapter" data-level="3.2.24" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03206"><i class="fa fa-check"></i><b>3.2.24</b> Wahlbezirk: 03206</a></li>
-<li class="chapter" data-level="3.2.25" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03207"><i class="fa fa-check"></i><b>3.2.25</b> Wahlbezirk: 03207</a></li>
-<li class="chapter" data-level="3.2.26" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03208"><i class="fa fa-check"></i><b>3.2.26</b> Wahlbezirk: 03208</a></li>
-<li class="chapter" data-level="3.2.27" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03209"><i class="fa fa-check"></i><b>3.2.27</b> Wahlbezirk: 03209</a></li>
-<li class="chapter" data-level="3.2.28" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03210"><i class="fa fa-check"></i><b>3.2.28</b> Wahlbezirk: 03210</a></li>
-<li class="chapter" data-level="3.2.29" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03211"><i class="fa fa-check"></i><b>3.2.29</b> Wahlbezirk: 03211</a></li>
-<li class="chapter" data-level="3.2.30" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03212"><i class="fa fa-check"></i><b>3.2.30</b> Wahlbezirk: 03212</a></li>
-<li class="chapter" data-level="3.2.31" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03213"><i class="fa fa-check"></i><b>3.2.31</b> Wahlbezirk: 03213</a></li>
-<li class="chapter" data-level="3.2.32" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03214"><i class="fa fa-check"></i><b>3.2.32</b> Wahlbezirk: 03214</a></li>
-<li class="chapter" data-level="3.2.33" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03215"><i class="fa fa-check"></i><b>3.2.33</b> Wahlbezirk: 03215</a></li>
-<li class="chapter" data-level="3.2.34" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03216"><i class="fa fa-check"></i><b>3.2.34</b> Wahlbezirk: 03216</a></li>
-<li class="chapter" data-level="3.2.35" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03217"><i class="fa fa-check"></i><b>3.2.35</b> Wahlbezirk: 03217</a></li>
-<li class="chapter" data-level="3.2.36" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03218"><i class="fa fa-check"></i><b>3.2.36</b> Wahlbezirk: 03218</a></li>
-<li class="chapter" data-level="3.2.37" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03301"><i class="fa fa-check"></i><b>3.2.37</b> Wahlbezirk: 03301</a></li>
-<li class="chapter" data-level="3.2.38" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03302"><i class="fa fa-check"></i><b>3.2.38</b> Wahlbezirk: 03302</a></li>
-<li class="chapter" data-level="3.2.39" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03303"><i class="fa fa-check"></i><b>3.2.39</b> Wahlbezirk: 03303</a></li>
-<li class="chapter" data-level="3.2.40" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03304"><i class="fa fa-check"></i><b>3.2.40</b> Wahlbezirk: 03304</a></li>
-<li class="chapter" data-level="3.2.41" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03305"><i class="fa fa-check"></i><b>3.2.41</b> Wahlbezirk: 03305</a></li>
-<li class="chapter" data-level="3.2.42" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03306"><i class="fa fa-check"></i><b>3.2.42</b> Wahlbezirk: 03306</a></li>
-<li class="chapter" data-level="3.2.43" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03307"><i class="fa fa-check"></i><b>3.2.43</b> Wahlbezirk: 03307</a></li>
-<li class="chapter" data-level="3.2.44" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03308"><i class="fa fa-check"></i><b>3.2.44</b> Wahlbezirk: 03308</a></li>
-<li class="chapter" data-level="3.2.45" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03309"><i class="fa fa-check"></i><b>3.2.45</b> Wahlbezirk: 03309</a></li>
-<li class="chapter" data-level="3.2.46" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03310"><i class="fa fa-check"></i><b>3.2.46</b> Wahlbezirk: 03310</a></li>
-<li class="chapter" data-level="3.2.47" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03311"><i class="fa fa-check"></i><b>3.2.47</b> Wahlbezirk: 03311</a></li>
-<li class="chapter" data-level="3.2.48" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03312"><i class="fa fa-check"></i><b>3.2.48</b> Wahlbezirk: 03312</a></li>
-<li class="chapter" data-level="3.2.49" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03313"><i class="fa fa-check"></i><b>3.2.49</b> Wahlbezirk: 03313</a></li>
-<li class="chapter" data-level="3.2.50" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03314"><i class="fa fa-check"></i><b>3.2.50</b> Wahlbezirk: 03314</a></li>
-<li class="chapter" data-level="3.2.51" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03315"><i class="fa fa-check"></i><b>3.2.51</b> Wahlbezirk: 03315</a></li>
-<li class="chapter" data-level="3.2.52" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03316"><i class="fa fa-check"></i><b>3.2.52</b> Wahlbezirk: 03316</a></li>
-<li class="chapter" data-level="3.2.53" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03317"><i class="fa fa-check"></i><b>3.2.53</b> Wahlbezirk: 03317</a></li>
-<li class="chapter" data-level="3.2.54" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03401"><i class="fa fa-check"></i><b>3.2.54</b> Wahlbezirk: 03401</a></li>
-<li class="chapter" data-level="3.2.55" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03402"><i class="fa fa-check"></i><b>3.2.55</b> Wahlbezirk: 03402</a></li>
-<li class="chapter" data-level="3.2.56" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03403"><i class="fa fa-check"></i><b>3.2.56</b> Wahlbezirk: 03403</a></li>
-<li class="chapter" data-level="3.2.57" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03404"><i class="fa fa-check"></i><b>3.2.57</b> Wahlbezirk: 03404</a></li>
-<li class="chapter" data-level="3.2.58" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03405"><i class="fa fa-check"></i><b>3.2.58</b> Wahlbezirk: 03405</a></li>
-<li class="chapter" data-level="3.2.59" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03406"><i class="fa fa-check"></i><b>3.2.59</b> Wahlbezirk: 03406</a></li>
-<li class="chapter" data-level="3.2.60" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03407"><i class="fa fa-check"></i><b>3.2.60</b> Wahlbezirk: 03407</a></li>
-<li class="chapter" data-level="3.2.61" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03408"><i class="fa fa-check"></i><b>3.2.61</b> Wahlbezirk: 03408</a></li>
-<li class="chapter" data-level="3.2.62" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03409"><i class="fa fa-check"></i><b>3.2.62</b> Wahlbezirk: 03409</a></li>
-<li class="chapter" data-level="3.2.63" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03410"><i class="fa fa-check"></i><b>3.2.63</b> Wahlbezirk: 03410</a></li>
-<li class="chapter" data-level="3.2.64" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03411"><i class="fa fa-check"></i><b>3.2.64</b> Wahlbezirk: 03411</a></li>
-<li class="chapter" data-level="3.2.65" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03412"><i class="fa fa-check"></i><b>3.2.65</b> Wahlbezirk: 03412</a></li>
-<li class="chapter" data-level="3.2.66" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03413"><i class="fa fa-check"></i><b>3.2.66</b> Wahlbezirk: 03413</a></li>
-<li class="chapter" data-level="3.2.67" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03414"><i class="fa fa-check"></i><b>3.2.67</b> Wahlbezirk: 03414</a></li>
-<li class="chapter" data-level="3.2.68" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03415"><i class="fa fa-check"></i><b>3.2.68</b> Wahlbezirk: 03415</a></li>
-<li class="chapter" data-level="3.2.69" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03501"><i class="fa fa-check"></i><b>3.2.69</b> Wahlbezirk: 03501</a></li>
-<li class="chapter" data-level="3.2.70" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03502"><i class="fa fa-check"></i><b>3.2.70</b> Wahlbezirk: 03502</a></li>
-<li class="chapter" data-level="3.2.71" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03503"><i class="fa fa-check"></i><b>3.2.71</b> Wahlbezirk: 03503</a></li>
-<li class="chapter" data-level="3.2.72" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03504"><i class="fa fa-check"></i><b>3.2.72</b> Wahlbezirk: 03504</a></li>
-<li class="chapter" data-level="3.2.73" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03505"><i class="fa fa-check"></i><b>3.2.73</b> Wahlbezirk: 03505</a></li>
-<li class="chapter" data-level="3.2.74" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03506"><i class="fa fa-check"></i><b>3.2.74</b> Wahlbezirk: 03506</a></li>
-<li class="chapter" data-level="3.2.75" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03507"><i class="fa fa-check"></i><b>3.2.75</b> Wahlbezirk: 03507</a></li>
-<li class="chapter" data-level="3.2.76" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03508"><i class="fa fa-check"></i><b>3.2.76</b> Wahlbezirk: 03508</a></li>
-<li class="chapter" data-level="3.2.77" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03509"><i class="fa fa-check"></i><b>3.2.77</b> Wahlbezirk: 03509</a></li>
-<li class="chapter" data-level="3.2.78" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03510"><i class="fa fa-check"></i><b>3.2.78</b> Wahlbezirk: 03510</a></li>
-<li class="chapter" data-level="3.2.79" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03511"><i class="fa fa-check"></i><b>3.2.79</b> Wahlbezirk: 03511</a></li>
-<li class="chapter" data-level="3.2.80" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03512"><i class="fa fa-check"></i><b>3.2.80</b> Wahlbezirk: 03512</a></li>
-<li class="chapter" data-level="3.2.81" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03513"><i class="fa fa-check"></i><b>3.2.81</b> Wahlbezirk: 03513</a></li>
-<li class="chapter" data-level="3.2.82" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03514"><i class="fa fa-check"></i><b>3.2.82</b> Wahlbezirk: 03514</a></li>
-<li class="chapter" data-level="3.2.83" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03515"><i class="fa fa-check"></i><b>3.2.83</b> Wahlbezirk: 03515</a></li>
-<li class="chapter" data-level="3.2.84" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03516"><i class="fa fa-check"></i><b>3.2.84</b> Wahlbezirk: 03516</a></li>
-<li class="chapter" data-level="3.2.85" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03517"><i class="fa fa-check"></i><b>3.2.85</b> Wahlbezirk: 03517</a></li>
-<li class="chapter" data-level="3.2.86" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03601"><i class="fa fa-check"></i><b>3.2.86</b> Wahlbezirk: 03601</a></li>
-<li class="chapter" data-level="3.2.87" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03602"><i class="fa fa-check"></i><b>3.2.87</b> Wahlbezirk: 03602</a></li>
-<li class="chapter" data-level="3.2.88" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03603"><i class="fa fa-check"></i><b>3.2.88</b> Wahlbezirk: 03603</a></li>
-<li class="chapter" data-level="3.2.89" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03604"><i class="fa fa-check"></i><b>3.2.89</b> Wahlbezirk: 03604</a></li>
-<li class="chapter" data-level="3.2.90" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03605"><i class="fa fa-check"></i><b>3.2.90</b> Wahlbezirk: 03605</a></li>
-<li class="chapter" data-level="3.2.91" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03606"><i class="fa fa-check"></i><b>3.2.91</b> Wahlbezirk: 03606</a></li>
-<li class="chapter" data-level="3.2.92" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03607"><i class="fa fa-check"></i><b>3.2.92</b> Wahlbezirk: 03607</a></li>
-<li class="chapter" data-level="3.2.93" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03608"><i class="fa fa-check"></i><b>3.2.93</b> Wahlbezirk: 03608</a></li>
-<li class="chapter" data-level="3.2.94" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03609"><i class="fa fa-check"></i><b>3.2.94</b> Wahlbezirk: 03609</a></li>
-<li class="chapter" data-level="3.2.95" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03610"><i class="fa fa-check"></i><b>3.2.95</b> Wahlbezirk: 03610</a></li>
-<li class="chapter" data-level="3.2.96" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03611"><i class="fa fa-check"></i><b>3.2.96</b> Wahlbezirk: 03611</a></li>
-<li class="chapter" data-level="3.2.97" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03612"><i class="fa fa-check"></i><b>3.2.97</b> Wahlbezirk: 03612</a></li>
-<li class="chapter" data-level="3.2.98" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03613"><i class="fa fa-check"></i><b>3.2.98</b> Wahlbezirk: 03613</a></li>
-<li class="chapter" data-level="3.2.99" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03614"><i class="fa fa-check"></i><b>3.2.99</b> Wahlbezirk: 03614</a></li>
-<li class="chapter" data-level="3.2.100" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03615"><i class="fa fa-check"></i><b>3.2.100</b> Wahlbezirk: 03615</a></li>
-<li class="chapter" data-level="3.2.101" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03616"><i class="fa fa-check"></i><b>3.2.101</b> Wahlbezirk: 03616</a></li>
-<li class="chapter" data-level="3.2.102" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03617"><i class="fa fa-check"></i><b>3.2.102</b> Wahlbezirk: 03617</a></li>
-<li class="chapter" data-level="3.2.103" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03618"><i class="fa fa-check"></i><b>3.2.103</b> Wahlbezirk: 03618</a></li>
-<li class="chapter" data-level="3.2.104" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03619"><i class="fa fa-check"></i><b>3.2.104</b> Wahlbezirk: 03619</a></li>
-<li class="chapter" data-level="3.2.105" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03620"><i class="fa fa-check"></i><b>3.2.105</b> Wahlbezirk: 03620</a></li>
-<li class="chapter" data-level="3.2.106" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03701"><i class="fa fa-check"></i><b>3.2.106</b> Wahlbezirk: 03701</a></li>
-<li class="chapter" data-level="3.2.107" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03702"><i class="fa fa-check"></i><b>3.2.107</b> Wahlbezirk: 03702</a></li>
-<li class="chapter" data-level="3.2.108" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03703"><i class="fa fa-check"></i><b>3.2.108</b> Wahlbezirk: 03703</a></li>
-<li class="chapter" data-level="3.2.109" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03704"><i class="fa fa-check"></i><b>3.2.109</b> Wahlbezirk: 03704</a></li>
-<li class="chapter" data-level="3.2.110" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03705"><i class="fa fa-check"></i><b>3.2.110</b> Wahlbezirk: 03705</a></li>
-<li class="chapter" data-level="3.2.111" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03706"><i class="fa fa-check"></i><b>3.2.111</b> Wahlbezirk: 03706</a></li>
-<li class="chapter" data-level="3.2.112" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03707"><i class="fa fa-check"></i><b>3.2.112</b> Wahlbezirk: 03707</a></li>
-<li class="chapter" data-level="3.2.113" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03708"><i class="fa fa-check"></i><b>3.2.113</b> Wahlbezirk: 03708</a></li>
-<li class="chapter" data-level="3.2.114" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03709"><i class="fa fa-check"></i><b>3.2.114</b> Wahlbezirk: 03709</a></li>
-<li class="chapter" data-level="3.2.115" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03710"><i class="fa fa-check"></i><b>3.2.115</b> Wahlbezirk: 03710</a></li>
-<li class="chapter" data-level="3.2.116" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03711"><i class="fa fa-check"></i><b>3.2.116</b> Wahlbezirk: 03711</a></li>
-<li class="chapter" data-level="3.2.117" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03712"><i class="fa fa-check"></i><b>3.2.117</b> Wahlbezirk: 03712</a></li>
-<li class="chapter" data-level="3.2.118" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03713"><i class="fa fa-check"></i><b>3.2.118</b> Wahlbezirk: 03713</a></li>
-<li class="chapter" data-level="3.2.119" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03714"><i class="fa fa-check"></i><b>3.2.119</b> Wahlbezirk: 03714</a></li>
-<li class="chapter" data-level="3.2.120" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03715"><i class="fa fa-check"></i><b>3.2.120</b> Wahlbezirk: 03715</a></li>
-<li class="chapter" data-level="3.2.121" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03716"><i class="fa fa-check"></i><b>3.2.121</b> Wahlbezirk: 03716</a></li>
-<li class="chapter" data-level="3.2.122" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03717"><i class="fa fa-check"></i><b>3.2.122</b> Wahlbezirk: 03717</a></li>
-<li class="chapter" data-level="3.2.123" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03801"><i class="fa fa-check"></i><b>3.2.123</b> Wahlbezirk: 03801</a></li>
-<li class="chapter" data-level="3.2.124" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03802"><i class="fa fa-check"></i><b>3.2.124</b> Wahlbezirk: 03802</a></li>
-<li class="chapter" data-level="3.2.125" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03803"><i class="fa fa-check"></i><b>3.2.125</b> Wahlbezirk: 03803</a></li>
-<li class="chapter" data-level="3.2.126" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03804"><i class="fa fa-check"></i><b>3.2.126</b> Wahlbezirk: 03804</a></li>
-<li class="chapter" data-level="3.2.127" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03805"><i class="fa fa-check"></i><b>3.2.127</b> Wahlbezirk: 03805</a></li>
-<li class="chapter" data-level="3.2.128" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03806"><i class="fa fa-check"></i><b>3.2.128</b> Wahlbezirk: 03806</a></li>
-<li class="chapter" data-level="3.2.129" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03807"><i class="fa fa-check"></i><b>3.2.129</b> Wahlbezirk: 03807</a></li>
-<li class="chapter" data-level="3.2.130" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03808"><i class="fa fa-check"></i><b>3.2.130</b> Wahlbezirk: 03808</a></li>
-<li class="chapter" data-level="3.2.131" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03809"><i class="fa fa-check"></i><b>3.2.131</b> Wahlbezirk: 03809</a></li>
-<li class="chapter" data-level="3.2.132" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03810"><i class="fa fa-check"></i><b>3.2.132</b> Wahlbezirk: 03810</a></li>
-<li class="chapter" data-level="3.2.133" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03811"><i class="fa fa-check"></i><b>3.2.133</b> Wahlbezirk: 03811</a></li>
-<li class="chapter" data-level="3.2.134" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03812"><i class="fa fa-check"></i><b>3.2.134</b> Wahlbezirk: 03812</a></li>
-<li class="chapter" data-level="3.2.135" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03813"><i class="fa fa-check"></i><b>3.2.135</b> Wahlbezirk: 03813</a></li>
-<li class="chapter" data-level="3.2.136" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03814"><i class="fa fa-check"></i><b>3.2.136</b> Wahlbezirk: 03814</a></li>
-<li class="chapter" data-level="3.2.137" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03815"><i class="fa fa-check"></i><b>3.2.137</b> Wahlbezirk: 03815</a></li>
-<li class="chapter" data-level="3.2.138" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03816"><i class="fa fa-check"></i><b>3.2.138</b> Wahlbezirk: 03816</a></li>
-<li class="chapter" data-level="3.2.139" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03817"><i class="fa fa-check"></i><b>3.2.139</b> Wahlbezirk: 03817</a></li>
-<li class="chapter" data-level="3.2.140" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03818"><i class="fa fa-check"></i><b>3.2.140</b> Wahlbezirk: 03818</a></li>
-<li class="chapter" data-level="3.2.141" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03819"><i class="fa fa-check"></i><b>3.2.141</b> Wahlbezirk: 03819</a></li>
-<li class="chapter" data-level="3.2.142" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03901"><i class="fa fa-check"></i><b>3.2.142</b> Wahlbezirk: 03901</a></li>
-<li class="chapter" data-level="3.2.143" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03902"><i class="fa fa-check"></i><b>3.2.143</b> Wahlbezirk: 03902</a></li>
-<li class="chapter" data-level="3.2.144" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03903"><i class="fa fa-check"></i><b>3.2.144</b> Wahlbezirk: 03903</a></li>
-<li class="chapter" data-level="3.2.145" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03904"><i class="fa fa-check"></i><b>3.2.145</b> Wahlbezirk: 03904</a></li>
-<li class="chapter" data-level="3.2.146" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03905"><i class="fa fa-check"></i><b>3.2.146</b> Wahlbezirk: 03905</a></li>
-<li class="chapter" data-level="3.2.147" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03906"><i class="fa fa-check"></i><b>3.2.147</b> Wahlbezirk: 03906</a></li>
-<li class="chapter" data-level="3.2.148" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03907"><i class="fa fa-check"></i><b>3.2.148</b> Wahlbezirk: 03907</a></li>
-<li class="chapter" data-level="3.2.149" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03908"><i class="fa fa-check"></i><b>3.2.149</b> Wahlbezirk: 03908</a></li>
-<li class="chapter" data-level="3.2.150" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03909"><i class="fa fa-check"></i><b>3.2.150</b> Wahlbezirk: 03909</a></li>
-<li class="chapter" data-level="3.2.151" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03910"><i class="fa fa-check"></i><b>3.2.151</b> Wahlbezirk: 03910</a></li>
-<li class="chapter" data-level="3.2.152" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03911"><i class="fa fa-check"></i><b>3.2.152</b> Wahlbezirk: 03911</a></li>
-<li class="chapter" data-level="3.2.153" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03912"><i class="fa fa-check"></i><b>3.2.153</b> Wahlbezirk: 03912</a></li>
-<li class="chapter" data-level="3.2.154" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03913"><i class="fa fa-check"></i><b>3.2.154</b> Wahlbezirk: 03913</a></li>
-<li class="chapter" data-level="3.2.155" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03914"><i class="fa fa-check"></i><b>3.2.155</b> Wahlbezirk: 03914</a></li>
-<li class="chapter" data-level="3.2.156" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03915"><i class="fa fa-check"></i><b>3.2.156</b> Wahlbezirk: 03915</a></li>
-<li class="chapter" data-level="3.2.157" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03916"><i class="fa fa-check"></i><b>3.2.157</b> Wahlbezirk: 03916</a></li>
-<li class="chapter" data-level="3.2.158" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03917"><i class="fa fa-check"></i><b>3.2.158</b> Wahlbezirk: 03917</a></li>
-<li class="chapter" data-level="3.2.159" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03918"><i class="fa fa-check"></i><b>3.2.159</b> Wahlbezirk: 03918</a></li>
-<li class="chapter" data-level="3.2.160" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03919"><i class="fa fa-check"></i><b>3.2.160</b> Wahlbezirk: 03919</a></li>
-<li class="chapter" data-level="3.2.161" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03119"><i class="fa fa-check"></i><b>3.2.161</b> Wahlbezirk: 03119</a></li>
-<li class="chapter" data-level="3.2.162" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03120"><i class="fa fa-check"></i><b>3.2.162</b> Wahlbezirk: 03120</a></li>
-<li class="chapter" data-level="3.2.163" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03121"><i class="fa fa-check"></i><b>3.2.163</b> Wahlbezirk: 03121</a></li>
-<li class="chapter" data-level="3.2.164" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03219"><i class="fa fa-check"></i><b>3.2.164</b> Wahlbezirk: 03219</a></li>
-<li class="chapter" data-level="3.2.165" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03220"><i class="fa fa-check"></i><b>3.2.165</b> Wahlbezirk: 03220</a></li>
-<li class="chapter" data-level="3.2.166" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03318"><i class="fa fa-check"></i><b>3.2.166</b> Wahlbezirk: 03318</a></li>
-<li class="chapter" data-level="3.2.167" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03319"><i class="fa fa-check"></i><b>3.2.167</b> Wahlbezirk: 03319</a></li>
-<li class="chapter" data-level="3.2.168" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03416"><i class="fa fa-check"></i><b>3.2.168</b> Wahlbezirk: 03416</a></li>
-<li class="chapter" data-level="3.2.169" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03417"><i class="fa fa-check"></i><b>3.2.169</b> Wahlbezirk: 03417</a></li>
-<li class="chapter" data-level="3.2.170" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03518"><i class="fa fa-check"></i><b>3.2.170</b> Wahlbezirk: 03518</a></li>
-<li class="chapter" data-level="3.2.171" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03519"><i class="fa fa-check"></i><b>3.2.171</b> Wahlbezirk: 03519</a></li>
-<li class="chapter" data-level="3.2.172" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03520"><i class="fa fa-check"></i><b>3.2.172</b> Wahlbezirk: 03520</a></li>
-<li class="chapter" data-level="3.2.173" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03718"><i class="fa fa-check"></i><b>3.2.173</b> Wahlbezirk: 03718</a></li>
-<li class="chapter" data-level="3.2.174" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03719"><i class="fa fa-check"></i><b>3.2.174</b> Wahlbezirk: 03719</a></li>
-<li class="chapter" data-level="3.2.175" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03720"><i class="fa fa-check"></i><b>3.2.175</b> Wahlbezirk: 03720</a></li>
-<li class="chapter" data-level="3.2.176" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03920"><i class="fa fa-check"></i><b>3.2.176</b> Wahlbezirk: 03920</a></li>
-<li class="chapter" data-level="3.2.177" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03921"><i class="fa fa-check"></i><b>3.2.177</b> Wahlbezirk: 03921</a></li>
-<li class="chapter" data-level="3.2.178" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03922"><i class="fa fa-check"></i><b>3.2.178</b> Wahlbezirk: 03922</a></li>
-<li class="chapter" data-level="3.2.179" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03923"><i class="fa fa-check"></i><b>3.2.179</b> Wahlbezirk: 03923</a></li>
-<li class="chapter" data-level="3.2.180" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03924"><i class="fa fa-check"></i><b>3.2.180</b> Wahlbezirk: 03924</a></li>
-<li class="chapter" data-level="3.2.181" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03122"><i class="fa fa-check"></i><b>3.2.181</b> Wahlbezirk: 03122</a></li>
-<li class="chapter" data-level="3.2.182" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03123"><i class="fa fa-check"></i><b>3.2.182</b> Wahlbezirk: 03123</a></li>
-<li class="chapter" data-level="3.2.183" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03221"><i class="fa fa-check"></i><b>3.2.183</b> Wahlbezirk: 03221</a></li>
-<li class="chapter" data-level="3.2.184" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03222"><i class="fa fa-check"></i><b>3.2.184</b> Wahlbezirk: 03222</a></li>
-<li class="chapter" data-level="3.2.185" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03320"><i class="fa fa-check"></i><b>3.2.185</b> Wahlbezirk: 03320</a></li>
-<li class="chapter" data-level="3.2.186" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03321"><i class="fa fa-check"></i><b>3.2.186</b> Wahlbezirk: 03321</a></li>
-<li class="chapter" data-level="3.2.187" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03418"><i class="fa fa-check"></i><b>3.2.187</b> Wahlbezirk: 03418</a></li>
-<li class="chapter" data-level="3.2.188" data-path="zeitverläufe.html"><a href="zeitverläufe.html#wahlbezirk-03600"><i class="fa fa-check"></i><b>3.2.188</b> Wahlbezirk: 03600</a></li>
-</ul></li>
+<li class="chapter" data-level="3.2" data-path="zeitverläufe.html"><a href="zeitverläufe.html#zeitverläufe-pro-pankower-wahlbezirk"><i class="fa fa-check"></i><b>3.2</b> Zeitverläufe pro Pankower Wahlbezirk</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="zusammenhänge.html"><a href="zusammenhänge.html"><i class="fa fa-check"></i><b>4</b> Zusammenhänge</a>
 <ul>
@@ -315,10 +125,18 @@
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="zusammenhänge.html"><a href="zusammenhänge.html#wie-hängt-lärm-und-das-wahlergebnis-der-grünen-zusammen"><i class="fa fa-check"></i><b>4.4</b> Wie hängt Lärm und das Wahlergebnis der Grünen zusammen?</a></li>
 <li class="chapter" data-level="4.5" data-path="zusammenhänge.html"><a href="zusammenhänge.html#anteil-der-wohnlagen-mit-lärm-pro-wahlbezirk-als-karte"><i class="fa fa-check"></i><b>4.5</b> Anteil der Wohnlagen mit Lärm pro Wahlbezirk als Karte</a></li>
+<li class="chapter" data-level="4.6" data-path="zusammenhänge.html"><a href="zusammenhänge.html#zusammenhang-zwischen-wahlergebnis-und-dem-prozentsatz-der-eu-ausländer-pro-wohnbezirk"><i class="fa fa-check"></i><b>4.6</b> Zusammenhang zwischen Wahlergebnis und dem Prozentsatz der EU-Ausländer pro Wohnbezirk</a></li>
+<li class="chapter" data-level="4.7" data-path="zusammenhänge.html"><a href="zusammenhänge.html#zusammenhang-zwischen-wahlergebnis-und-dem-prozentsatz-der-nicht-eu-ausländer-pro-wohnbezirk"><i class="fa fa-check"></i><b>4.7</b> Zusammenhang zwischen Wahlergebnis und dem Prozentsatz der Nicht-EU-Ausländer pro Wohnbezirk</a></li>
+<li class="chapter" data-level="4.8" data-path="zusammenhänge.html"><a href="zusammenhänge.html#zusammenhang-zwischen-wahlergebnis-und-dem-prozentsatz-katholiken-über-18-pro-wohnbezirk"><i class="fa fa-check"></i><b>4.8</b> Zusammenhang zwischen Wahlergebnis und dem Prozentsatz Katholiken über 18 pro Wohnbezirk</a></li>
+<li class="chapter" data-level="4.9" data-path="zusammenhänge.html"><a href="zusammenhänge.html#karte-mit-dem-anteil-an-katholischen-personen-über-18-jahren"><i class="fa fa-check"></i><b>4.9</b> Karte mit dem Anteil an katholischen Personen über 18 Jahren</a></li>
+<li class="chapter" data-level="4.10" data-path="zusammenhänge.html"><a href="zusammenhänge.html#zusammenhang-zwischen-wahlergebnis-und-dem-prozentsatz-katholiken-über-18-pro-wohnbezirk-1"><i class="fa fa-check"></i><b>4.10</b> Zusammenhang zwischen Wahlergebnis und dem Prozentsatz Katholiken über 18 pro Wohnbezirk</a></li>
+<li class="chapter" data-level="4.11" data-path="zusammenhänge.html"><a href="zusammenhänge.html#karte-mit-dem-anteil-an-katholischen-personen-über-18-jahren-1"><i class="fa fa-check"></i><b>4.11</b> Karte mit dem Anteil an katholischen Personen über 18 Jahren</a></li>
+<li class="chapter" data-level="4.12" data-path="zusammenhänge.html"><a href="zusammenhänge.html#zusammenhang-zwischen-wahlergebnis-und-dem-prozentsatz-von-geschiedenen-personen-pro-wohnbezirk"><i class="fa fa-check"></i><b>4.12</b> Zusammenhang zwischen Wahlergebnis und dem Prozentsatz von geschiedenen Personen pro Wohnbezirk</a></li>
+<li class="chapter" data-level="4.13" data-path="zusammenhänge.html"><a href="zusammenhänge.html#karte-mit-dem-anteil-an-geschiedenen-personen"><i class="fa fa-check"></i><b>4.13</b> Karte mit dem Anteil an geschiedenen Personen</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="potentialanalyse.html"><a href="potentialanalyse.html"><i class="fa fa-check"></i><b>5</b> Potentialanalyse</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="potentialanalyse.html"><a href="potentialanalyse.html#wobble-bezirke"><i class="fa fa-check"></i><b>5.1</b> “Wobble”-Bezirke</a></li>
+<li class="chapter" data-level="5.1" data-path="potentialanalyse.html"><a href="potentialanalyse.html#wobble-bezirke-variationskoeffizient"><i class="fa fa-check"></i><b>5.1</b> “Wobble”-Bezirke (Variationskoeffizient)</a></li>
 <li class="chapter" data-level="5.2" data-path="potentialanalyse.html"><a href="potentialanalyse.html#differenez-der-erst--und-zweitstimmen-bei-der-bundestagswahl-2009"><i class="fa fa-check"></i><b>5.2</b> Differenez der Erst- und Zweitstimmen bei der Bundestagswahl 2009</a></li>
 <li class="chapter" data-level="5.3" data-path="potentialanalyse.html"><a href="potentialanalyse.html#differenez-der-erst--und-zweitstimmen-bei-den-wahlen-zum-abgeordnetenhaus-2011"><i class="fa fa-check"></i><b>5.3</b> Differenez der Erst- und Zweitstimmen bei den Wahlen zum Abgeordnetenhaus 2011</a></li>
 <li class="chapter" data-level="5.4" data-path="potentialanalyse.html"><a href="potentialanalyse.html#differenez-der-erst--und-zweitstimmen-bei-der-bundestagswahl-2013"><i class="fa fa-check"></i><b>5.4</b> Differenez der Erst- und Zweitstimmen bei der Bundestagswahl 2013</a></li>
@@ -347,8 +165,8 @@
             <section class="normal" id="section-">
 <div id="header">
 <h1 class="title">Wahlergebnisse der Berliner Grünen</h1>
-<p class="author"><em>Jakob Schumacher, Julius Oblong</em></p>
-<p class="date" style="margin-top: 1.5em;"><em>2021-05-25</em></p>
+<p class="author"><em>Jakob Schumacher, Julius Oblong, Daniel Freudl</em></p>
+<p class="date" style="margin-top: 1.5em;"><em>2021-05-30</em></p>
 </div>
 <div id="einleitung" class="section level1" number="1">
 <h1><span class="header-section-number">Kapitel 1</span> Einleitung</h1>
@@ -356,25 +174,75 @@
 <img src="https://www.gruene-hessen.de/werkzeugkasten/wp-content/themes/hessengruen/images/vorschaubild.jpg" style="width:20.0%" alt="" />
 <p class="caption">Partei Logo</p>
 </div>
-<div id="ziel" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Ziel</h2>
-<p>Diese Darstellung dient dem Aufdecken von Trends bei den Wahlergebnissen der Pankower Grünen. Die angezeigten Graphen sind prinzipiell erweiterbar um andere Wahlergebnisse z.B. der Wahlen zu Abgeordnetenhaus.</p>
+<div id="was-soll-diese-webseite" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Was soll diese Webseite?</h2>
+<p>Wir wollen grüne Ideen umsetzen. Dazu müssen wir stärkste Kraft werden. DAs beudeutet wir müssen Wahlen gewinnen und uns für die Wählenden einsetzen. Die Analyse von alten Wahlen und die räumliche Verteilung ermöglichen es Zusammenhänge besser einordnen zu können. Diese Darstellung dienen dem Aufdecken von Trends und Zusammenhängen. Der Fokus dieser Analyse liegt auf den Wahlergebnissen der Pankower Grünen - wobei dies problemlos auch auf andere Bezirke ausweitbar wäre.</p>
+<p>Eine Analyse und Darstellung von Wahldaten ist kein Heilsbringer. Wahlkampf ist immer auch gefährdet sich manipulativer Elemente zu bedienen. Dem stellen wir uns entschieden dagegen. Unser Ziel ist es Menschen von unseren Ideen für die Zukunft zu überzeugen. Hier kann es uns helfen, wenn wir als Wahlkämpfer Zusammenhänge besser verstehen.</p>
 </div>
-<div id="datenquelle" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Datenquelle</h2>
-<p>Alle Daten entstammen dem Landesamt für Statistik Berlin-Brandenburg. Die Daten wurden im März 2021 von der Seite <a href="https://www.wahlen-berlin.de/Historie/hist_Wahlen.asp">wahlen-berlin.de</a> heruntergeladen</p>
+<div id="wie-ist-diese-webseite-zu-benutzen" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Wie ist diese Webseite zu benutzen?</h2>
+<p>Vor einer Wahlkampfaktion kann man sich anschauen, auf welche Wahlbezirke man bei der Aktion zielt. Dann kann man sich die Daten und Zusammenhänge für diesen Wahlbezirk auf dieser Webseite anschauen. Die Grafiken können dadurch bei der strategiesche Ausrichtung helfen. Zum Beispiel werden die Fragen aus einem eher extremistischen Wahlbezirk (viele AFD und Linkswähler) anders sein als in einem eher konservativ geprägten Bezirk (CDU-Wähler, älter, kirchlicher).</p>
 </div>
-<div id="karten" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> Karten</h2>
-<p>Die Kartendateien (Shape-Files) sind von der Seite <a href="https://daten.berlin.de/datensaetze/geometrien-der-wahlbezirke-f%C3%BCr-die-wahl-zum-abgeordnetenhaus-von-berlin-und-zu-den-0">Open-Data Berlin</a></p>
+<div id="was-ist-auf-der-seite-zu-finden" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Was ist auf der Seite zu finden?</h2>
+<p>Die Seite hat die Strategie möglichst gut sortierte und erklärte Aufbereitungen zu zeigen. Dadurch wird den Wahlkämpfenden der drei Ebenen (BVV, AGH, Bundestag) die Möglichkeit gegeben sich die von Ihnen gewünschten Daten anzeigen zu lassen. Diese Vorgehensweise beinhaltet im Gegenzug die Schwierigkeit, das die betrachtende Person selber einschätzen muss, was relevant ist und was nicht. Das ist schwierig. Leider gibt es keine Möglichkeit für alle im Wahlkampf nur die relevanten Daten anzuzeigen (oder wir kennen sie nicht)</p>
+<p>Die Inhalte teilen sich grob in die folgenden drei Gruppen auf:
+* Graphische Aufbereitung von vergangenen Wahlen, als Karten und als Verlaufsdaten
+* Zusammenhänge von Wahlergebnissen und soziologischen Kennzahlen pro Wahlbezirk
+* Eine Potentialanalyse</p>
 </div>
-<div id="methoden" class="section level2" number="1.4">
-<h2><span class="header-section-number">1.4</span> Methoden</h2>
-<p>Die Daten wurden verarbeitet mit R. Die Darstellung erfolgt durch ein <a href="https://rmarkdown.rstudio.com/flexdashboard/index.html">Flexdashboard</a>. Die Zahlen wurden nach bestem Wissen und Gewissen geprüft - Fehler sind aber selbstverständlich möglich. Die genaue Berechnung ist aus dem Source-Code zu entnehmen (oben rechts).</p>
+<div id="worin-unterscheidet-sich-diese-seite-von-der-darstellung-im-grünen-netz" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Worin unterscheidet sich diese Seite von der Darstellung im Grünen Netz?</h2>
+<ul>
+<li>Die Darstellung ist nach den Wünschen der Pankower Grünen formbar</li>
+<li>Diese Webseite kann Daten “umrechnen,” die aus anderen räumlichen Zusammenhängen außerhalb der Strukturdaten bekannt sind.</li>
+</ul>
 </div>
-<div id="limitationen" class="section level2" number="1.5">
-<h2><span class="header-section-number">1.5</span> Limitationen</h2>
-<p>Am problematischsten ist die Darstellung der Wahlbezirke und der Abgeordnetenwahlkreise innerhalb Pankows. Den frei verfügbaren Informationen im Netz ist die Änderung der Wahlkreise nicht exakt und maschinenlesbar zu entnehmen. Deswegen erfolgt hier nur die Darstellung der letzten zwei Wahlen.</p>
+<div id="wie-wurden-diese-daten-erstellt" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Wie wurden diese Daten erstellt?</h2>
+<ul>
+<li>Korrelationsdaten: Daten zu Lebensweltlich Orientierten Räumen (LOR) wurden umgerechnet auf die Wahlbezirke, dies erfolgt anhand der Überlappung (R-Befehl “aw_interpolate”).</li>
+<li>Die Korrelation erfolgt durch die Pearson-Methode (R-Befehl “cor”).</li>
+<li>“Wobble-Bezirke” sind Bezirke mit einer großen Schwankungsbreite zwischen den Wahlergebnissen. Dies wurde berechnet mit dem Variationskoeffizient (R-Befehl 100 * sd() / mean()).</li>
+<li>Die anderen Daten sind zumeist eine einfache Darstellung.</li>
+<li>Die Daten wurden verarbeitet mit R. Die wichtigsten benutze Pakete sind tidyverse, tmap, sf, areal. Die Darstellung erfolgt durch bookdown. Die Veröffentlichung erfolgt auf Github.</li>
+<li>Die genaue Berechnung ist reproduzierbar - der Source-Code ist dem Repository bei Github zu entnehmen.</li>
+</ul>
+</div>
+<div id="welche-limitationen-gibt-es" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Welche Limitationen gibt es?</h2>
+<div id="fehler" class="section level3 unnumbered">
+<h3>Limitation 1</h3>
+<p>Die Daten sind nicht auf wissenschaftlichen Niveau. Fehler in der Berechnung sind also durchaus wahrscheinlich, auch wenn wir versuchen diese zu vermeiden. Wir versuchen die Unsicherheiten transparaent aufzuzeigen, so weit uns das bekannt ist.</p>
+</div>
+<div id="scheinkausalitaet" class="section level3 unnumbered">
+<h3>Limitation 2</h3>
+<p>Korrelation sind nicht Kausalität. Dinge die miteinander einhergehen, müssen sich nicht gegenseitig bedingen. Dies betrifft insbesondere die Zusammenhänge von Wahlergebnissen mit Kennzahlen. Beispiel: “Je mehr Jogger unterwegs sind, desto höher sind die Wohnungspreise.” Zum genaueren Nachlesen siehe <a href="https://de.wikipedia.org/wiki/Cum_hoc_ergo_propter_hoc">Wikipedia-Artikel zur Scheinkausalität</a></p>
+</div>
+<div id="potential" class="section level3 unnumbered">
+<h3>Limitaiton 3</h3>
+<p>Die Potentialanalyse ist rudimentär. Ohne eine tiefergehende wissenschaftliche Untersuchung ist es nicht möglich Potentiale genau vorherzusagen. Von der Bundesebene gibt es ebenfalls eine Potentialanalyse - noch ist uns unbekannt worauf diese beruht.</p>
+</div>
+<div id="fehlendgeom" class="section level3 unnumbered">
+<h3>Limitaiton 4</h3>
+<p>Die Geometrien liegen nicht für alle Wahlen vor. Wahlbezirke, die zwischen 2011 und heute eine Änderung erfahren haben sind also verfälscht in den Trends und den kartographischen Darstellungen.</p>
+</div>
+<div id="umrechnung" class="section level3 unnumbered">
+<h3>Limitaiton 5</h3>
+<p>Die Umrechnung von Daten aus anderen räumlichen Zusammenhängen auf die Wahlbezirke ist mit einem Zuwachs an Ungenauigkeit versehen.</p>
+</div>
+<div id="breifwahl" class="section level3 unnumbered">
+<h3>Limitaiton 6</h3>
+<p>Alle Daten, die sich auf einen Wahlbezirk beziehen beinhalten nicht die Briefwahldaten</p>
+</div>
+</div>
+<div id="woher-kommen-die-daten" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> Woher kommen die Daten</h2>
+<p>Alle Daten entstammen auf die ein oder andere Art und Weise dem Landesamt für Statistik Berlin-Brandenburg.</p>
+<p>Wahlergebnisse und Strukturdaten
+* <a href="https://www.wahlen-berlin.de/Historie/hist_Wahlen.asp">wahlen-berlin.de</a></p>
+<p>Daten zu den Lebensweltlich orientierten Räumen und Wahlgeometrien
+* <a href="https://daten.berlin.de/">daten.berlin.de/</a></p>
 
 </div>
 </div>

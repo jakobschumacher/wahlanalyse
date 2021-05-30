@@ -12,3 +12,8 @@ pre {
 pre code {
   white-space: inherit;
 }
+
+div.FOO {
+  font-weight: bold;
+  background-color: lightgrey;
+}

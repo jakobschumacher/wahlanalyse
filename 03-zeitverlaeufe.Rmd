@@ -1,31 +1,28 @@
 # Zeitverläufe
 
-
 ## Entwicklung der Wahlergebnisse der großen Parteien in Pankow 2009 bis 2019
-```{r Zeitverläufe1, echo=FALSE, message=FALSE}
+```{r zeitverlaeufe1, echo=FALSE, message=FALSE}
 suppressPackageStartupMessages(library(tidyverse)) # Tidying data
 suppressPackageStartupMessages(library(sf)) # Reading Shapefiles
 suppressPackageStartupMessages(library(here)) # Find correct place to load
 suppressPackageStartupMessages(library(tmap)) # Find correct place to load
 suppressPackageStartupMessages(library(ggalt)) # For splinter
 
-df_wahlen <- readRDS(file=here("data/df_wahlen.rds"))
+df_wahlen <- readRDS(file=here("data/df_wahlen.rds")) 
 
-df_temp <- df_wahlen %>%
-  filter(bezirksname == "Pankow") %>%
-  group_by(jahr, partei, wahl) %>%
-  summarise(mean = mean(stimmanteil), .groups = "drop") %>%
-  ungroup() %>%
+df <- df_wahlen %>%
+  filter(str_detect(wahlbezirk, "^03")) %>%
+  mutate(partei = factor(partei, levels = c("af_d", "cdu", "die_linke", "die_partei", "fdp", "grune", "spd"), labels = c("AFD", "CDU", "Linkspartei", "Die Partei", "FDP", "Grüne", "SPD")))
+  
+df_temp_gesamt <- df %>%   
   group_by(jahr, partei) %>%
-  summarise(mean = mean(mean), .groups = "drop") %>%
-  mutate(partei = factor(partei, levels = c("af_d", "cdu", "die_linke", "fdp", "grune", "spd"), labels = c("AFD", "CDU", "Linkspartei", "FDP", "Grüne", "SPD")))
+  summarise(mean = mean(stimmanteil), .groups = "drop")
 
-
-ggplot(df_temp) +
+ggplot(df_temp_gesamt) +
   geom_point(aes(x=jahr, y=mean, color = partei)) +
   geom_xspline(aes(x = jahr, y = mean, color = partei), size = 0.8, spline_shape = -.25) +
   theme_classic() +
-   scale_color_manual(values = c("AFD" = "deepskyblue", "CDU" = "black", "Linkspartei" = "hotpink1", "FDP" = "gold", "Grüne" = "forestgreen", "SPD" = "red")) +
+   scale_color_manual(values = c("AFD" = "deepskyblue", "CDU" = "black", "Die Partei" = "darkred", "Linkspartei" = "hotpink1", "FDP" = "gold", "Grüne" = "forestgreen", "SPD" = "red")) +
   theme(legend.position = "bottom") +
   labs(    color = "",
            x = "",
@@ -40,17 +37,11 @@ ggplot(df_temp) +
 
 
 ## Zeitverläufe pro Pankower Wahlbezirk
-```{r pressure,fig.width=6,echo=FALSE,message=FALSE,results="asis"}
+```{r zeitverlaeufe2,fig.width=6,echo=FALSE,message=FALSE,results="asis"}
 
-df_temp <- df_wahlen %>%
-  filter(bezirksname == "Pankow") %>%
-  # filter(wahlbezirk %in% wahlbez) %>% 
-  group_by(jahr, partei, wahl, wahlbezirk) %>%
-  summarise(mean = mean(stimmanteil), .groups = "drop") %>%
-  ungroup() %>%
+df_temp <- df %>%
   group_by(jahr, partei, wahlbezirk) %>%
-  summarise(mean = mean(mean), .groups = "drop") %>%
-  mutate(partei = factor(partei, levels = c("af_d", "cdu", "die_linke", "fdp", "grune", "spd"), labels = c("AFD", "CDU", "Linkspartei", "FDP", "Grüne", "SPD")))
+  summarise(mean = mean(stimmanteil), .groups = "drop") 
 
 for(i in unique(df_temp$wahlbezirk)) {
   cat("  \n### Wahlbezirk: ", i , "  \n")
@@ -59,7 +50,7 @@ for(i in unique(df_temp$wahlbezirk)) {
   geom_point(aes(x=jahr, y=mean, color = partei)) +
   geom_xspline(aes(x = jahr, y = mean, color = partei), size = 0.8, spline_shape = -.25) +
   theme_classic() +
-   scale_color_manual(values = c("AFD" = "deepskyblue", "CDU" = "black", "Linkspartei" = "hotpink1", "FDP" = "gold", "Grüne" = "forestgreen", "SPD" = "red")) +
+   scale_color_manual(values = c("AFD" = "deepskyblue", "CDU" = "black", "Die Partei" = "darkred", "Linkspartei" = "hotpink1", "FDP" = "gold", "Grüne" = "forestgreen", "SPD" = "red")) +
   theme(legend.position = "bottom") +
   labs(    color = "",
            x = "",

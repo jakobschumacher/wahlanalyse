@@ -6,3 +6,8 @@ before_chapter_script: "R/before_chapter_script.R"
 language:
   ui:
     chapter_name: "Kapitel "
+bookdown::gitbook:
+  number_sections: false
+  config:
+    toc:
+      collapse: section

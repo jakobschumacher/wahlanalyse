@@ -14,18 +14,19 @@ tmap_mode("view")
 
 ```
 
-
-## "Wobble"-Bezirke
+## "Wobble"-Bezirke (Variationskoeffizient)
 ```{r potentialanalyse1}
-df_temp <- df %>% 
+# Variationskoeffizient
+library(DT)
+datatable(
+df %>% 
+  st_drop_geometry() %>% 
   select(wahlbezirk, stimmanteil, wahl) %>% 
   group_by(wahlbezirk) %>% 
-  summarise(Standardabweichung = round(sd(stimmanteil),2))
-
-tm_shape(df_temp) +
-  tm_fill("Standardabweichung") +
-  tm_layout(frame = FALSE) +
-  tm_borders()
+  summarise(Variationskoeffizient = round(100 * sd(stimmanteil) / mean(stimmanteil),2)) %>% 
+  left_join(df %>% st_drop_geometry() %>% group_by(wahlbezirk, wahl) %>% summarise(stimmanteil)) %>% 
+  pivot_wider(names_from = wahl, values_from = stimmanteil)
+)
 ```
 "Wobble" Bezirke sind Bezirke, deren Wahlergebnisse sich zwischen den Jahren sehr stark voneinander unterscheiden. 
 

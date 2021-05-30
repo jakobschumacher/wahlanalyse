@@ -1,4 +1,5 @@
 # Zusammenhänge
+Alle Wahlergebnisse beziehen sich auf die Zweitstimmen der Bundestagswahl 2017
 ```{r zusammenhaenge setup, echo=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 
@@ -9,7 +10,8 @@ suppressPackageStartupMessages(library(tmap)) # Find correct place to load
 
 df_bu <- readRDS(file=here("data/df_bu.rds")) %>% filter(partei == "grune")
 df_alter <- readRDS(file=here("data/df_alter.rds")) 
-df_wohnqualitaet <- readRDS(file=here("data/df_wohnqualitaet.rds")) 
+df_wohnqualitaet <- readRDS(file=here("data/df_wohnqualitaet.rds")) %>% filter(wahl == "BU2_2017")
+df_strukturdaten <- readRDS(here("data/df_strukturdaten.rds"))
 
 tmap_mode("view")
 
@@ -29,6 +31,7 @@ ggplot(df_bu, aes(x = altersmittelwert, y = stimmanteil)) +
   annotate("text", x = 52, y = 30, label = paste("Korrelations-Koeff:", korrelationskoeffizent)) + 
   theme(text = element_text(size = 20)) 
 ```
+Limitationen: [Nicht ausreichend überprüft](#fehler), [Scheinkausalität](#scheinkausalitaet), [Umrechnung](#umrechnung)
 
 ## Altesmittelwert der Wahlbezirke
 ```{r zusammenhaenge2}
@@ -37,6 +40,7 @@ tm_shape(df_alter) +
   tm_fill("altersmittelwert", alpha = .5) +
     tm_layout(frame = FALSE) 
 ```
+Limitationen: [Nicht ausreichend überprüft](#fehler), [Scheinkausalität](#scheinkausalitaet), [Umrechnung](#umrechnung)
 
 ## Wie hängt die Wohnlage mit den Wahlergebnissen der Grünen zusammen?
 ### Gute Wohnlage
@@ -54,14 +58,16 @@ ggplot(df_wohnqualitaet, aes(x = gutewohnlage, y = stimmanteil)) +
   theme(text = element_text(size = 20)) 
 
 ```
+Limitationen: [Nicht ausreichend überprüft](#fehler), [Scheinkausalität](#scheinkausalitaet), [Umrechnung](#umrechnung)
 
-### Einfache Wohnlage
+
+### Mittlere Wohnlage
 ```{r}
-korrelationskoeffizent = df_wohnqualitaet %>% st_drop_geometry() %>% summarize(correlation = cor(stimmanteil, einfachewohnlage, use = "complete.obs")) %>% pull() %>% round(.,2) 
+korrelationskoeffizent = df_wohnqualitaet %>% st_drop_geometry() %>% summarize(correlation = cor(stimmanteil, mittlerewohnlage, use = "complete.obs")) %>% pull() %>% round(.,2) 
 
-ggplot(df_wohnqualitaet, aes(x = einfachewohnlage, y = stimmanteil)) +
+ggplot(df_wohnqualitaet, aes(x = mittlerewohnlage, y = stimmanteil)) +
   geom_jitter(aes(color = stimmanteil)) +
-  scale_color_continuous(low = "lightgreen",  high = "darkgreen") +
+  scale_color_continuous(low = "darkseagreen1",  high = "forestgreen") +
   labs(x = "Anteil einfache Wohnlage pro Wahlbezirk", y = "Wahlergebnis der Grünen in %") +  
   geom_smooth(method = "lm", se = TRUE) +
   theme_classic() +
@@ -70,6 +76,24 @@ ggplot(df_wohnqualitaet, aes(x = einfachewohnlage, y = stimmanteil)) +
   theme(text = element_text(size = 20)) 
 
 ```
+Limitationen: [Nicht ausreichend überprüft](#fehler), [Scheinkausalität](#scheinkausalitaet), [Umrechnung](#umrechnung)
+
+### Einfache Wohnlage
+```{r}
+korrelationskoeffizent = df_wohnqualitaet %>% st_drop_geometry() %>% summarize(correlation = cor(stimmanteil, einfachewohnlage, use = "complete.obs")) %>% pull() %>% round(.,2) 
+
+ggplot(df_wohnqualitaet, aes(x = einfachewohnlage, y = stimmanteil)) +
+  geom_jitter(aes(color = stimmanteil)) +
+  scale_color_continuous(low = "darkseagreen1",  high = "forestgreen") +
+  labs(x = "Anteil einfache Wohnlage pro Wahlbezirk", y = "Wahlergebnis der Grünen in %") +  
+  geom_smooth(method = "lm", se = TRUE) +
+  theme_classic() +
+  theme(legend.position = "none") + 
+  annotate("text", x = 70, y = 70, label = paste("Korrelations-Koeff:", korrelationskoeffizent)) +
+  theme(text = element_text(size = 20)) 
+
+```
+Limitationen: [Nicht ausreichend überprüft](#fehler), [Scheinkausalität](#scheinkausalitaet), [Umrechnung](#umrechnung)
 
 ## Wie hängt Lärm und das Wahlergebnis der Grünen zusammen?
 ```{r zusammenhaenge6}
@@ -84,6 +108,7 @@ ggplot(df_wohnqualitaet, aes(x = lärmanteil, y = stimmanteil)) +
   theme_classic() +
   theme(legend.position = "none") 
 ```
+Limitationen: [Nicht ausreichend überprüft](#fehler), [Scheinkausalität](#scheinkausalitaet), [Umrechnung](#umrechnung)
 
 ## Anteil der Wohnlagen mit Lärm pro Wahlbezirk als Karte
 ```{r zusammenhaenge7}
@@ -92,3 +117,86 @@ tm_shape(df_wohnqualitaet) +
   tm_fill("lärmanteil", alpha = .5) +
     tm_layout(frame = FALSE) 
 ```
+Limitationen: [Nicht ausreichend überprüft](#fehler), [Scheinkausalität](#scheinkausalitaet), [Umrechnung](#umrechnung)
+
+
+## Zusammenhang zwischen Wahlergebnis und dem Prozentsatz der EU-Ausländer pro Wohnbezirk
+```{r}
+korrelationskoeffizent = df_strukturdaten %>% st_drop_geometry() %>% summarize(correlation = cor(stimmanteil, eu_burger_prozent, use = "complete.obs")) %>% pull() %>% round(.,3) 
+
+ggplot(df_strukturdaten, aes(x = eu_burger_prozent, y = stimmanteil)) +
+  geom_jitter(aes(color = stimmanteil)) +
+  scale_color_continuous(low = "lightgreen",  high = "darkgreen") +
+  labs(x = "Prozentsatz an EU-Ausländern pro Wohnbezirk", y = "Wahlergebnis der Berliner Grünen in %") +  
+  geom_smooth(method = "lm", se = TRUE) +
+  annotate("text", x = 20, y = 35, label = paste("Korrelations-Koeff:", korrelationskoeffizent)) +
+  theme_classic() +
+  theme(legend.position = "none") 
+```
+Limitationen: [Nicht ausreichend überprüft](#fehler), [Scheinkausalität](#scheinkausalitaet)
+
+
+## Zusammenhang zwischen Wahlergebnis und dem Prozentsatz der Nicht-EU-Ausländer pro Wohnbezirk
+```{r}
+korrelationskoeffizent = df_strukturdaten %>% st_drop_geometry() %>% summarize(correlation = cor(stimmanteil, auslander_prozent, use = "complete.obs")) %>% pull() %>% round(.,3) 
+
+ggplot(df_strukturdaten, aes(x = auslander_prozent, y = stimmanteil)) +
+  geom_jitter(aes(color = stimmanteil)) +
+  scale_color_continuous(low = "lightgreen",  high = "darkgreen") +
+  labs(x = "Prozentsatz an Nicht-EU-Ausländern pro Wahlbezirk", y = "Wahlergebnis der Grünen in %") +  
+  geom_smooth(method = "lm", se = TRUE) +
+  annotate("text", x = 20, y = 35, label = paste("Korrelations-Koeff:", korrelationskoeffizent)) +
+  theme_classic() +
+  theme(legend.position = "none") 
+```
+Limitationen: [Nicht ausreichend überprüft](#fehler), [Scheinkausalität](#scheinkausalitaet)
+
+## Zusammenhang zwischen Wahlergebnis und dem Prozentsatz Katholiken über 18 pro Wohnbezirk
+```{r}
+korrelationskoeffizent = df_strukturdaten %>% st_drop_geometry() %>% summarize(correlation = cor(stimmanteil, deutsche_18_katholisch_prozent, use = "complete.obs")) %>% pull() %>% round(.,3) 
+
+ggplot(df_strukturdaten, aes(x = deutsche_18_katholisch_prozent, y = stimmanteil)) +
+  geom_jitter(aes(color = stimmanteil)) +
+  scale_color_continuous(low = "lightgreen",  high = "darkgreen") +
+  labs(x = "Prozentsatz an Katholiken über 18 pro Wahlbezirk", y = "Wahlergebnis der Grünen in %") +  
+  geom_smooth(method = "lm", se = TRUE) +
+  annotate("text", x = 20, y = 35, label = paste("Korrelations-Koeff:", korrelationskoeffizent)) +
+  theme_classic() +
+  theme(legend.position = "none") 
+```
+Limitationen: [Nicht ausreichend überprüft](#fehler), [Scheinkausalität](#scheinkausalitaet)
+
+## Karte mit dem Anteil an katholischen Personen über 18 Jahren
+```{r}
+tm_shape(df_strukturdaten) +
+  tm_borders() +
+  tm_fill("deutsche_18_katholisch_prozent", alpha = .5) +
+    tm_layout(frame = FALSE) 
+```
+
+
+## Zusammenhang zwischen Wahlergebnis und dem Prozentsatz von geschiedenen Personen pro Wohnbezirk
+```{r}
+korrelationskoeffizent = df_strukturdaten %>% st_drop_geometry() %>% summarize(correlation = cor(stimmanteil, deutsche_18_familienstand_geschieden_prozent, use = "complete.obs")) %>% pull() %>% round(.,3) 
+
+ggplot(df_strukturdaten, aes(x = deutsche_18_familienstand_geschieden_prozent, y = stimmanteil)) +
+  geom_jitter(aes(color = stimmanteil)) +
+  scale_color_continuous(low = "lightgreen",  high = "darkgreen") +
+  labs(x = "Prozentsatz von geschiedenen Personen pro Wahlbezirk", y = "Wahlergebnis der Grünen in %") +  
+  geom_smooth(method = "lm", se = TRUE) +
+  annotate("text", x = 20, y = 35, label = paste("Korrelations-Koeff:", korrelationskoeffizent)) +
+  theme_classic() +
+  theme(legend.position = "none") 
+```
+Limitationen: [Nicht ausreichend überprüft](#fehler), [Scheinkausalität](#scheinkausalitaet)
+
+## Karte mit dem Anteil an geschiedenen Personen
+```{r}
+tm_shape(df_strukturdaten) +
+  tm_borders() +
+  tm_fill("deutsche_18_familienstand_geschieden_prozent", alpha = .5) +
+    tm_layout(frame = FALSE) 
+```
+
+
+
