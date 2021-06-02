@@ -1,0 +1,26 @@
+# Multivariable Zusammenhänge
+Alle Wahlergebnisse beziehen sich auf die Zweitstimmen der Bundestagswahl 2017
+```{r zusammenhaenge setup, echo=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+
+suppressPackageStartupMessages(library(tidyverse)) # Tidying data
+suppressPackageStartupMessages(library(sf)) # Reading Shapefiles
+suppressPackageStartupMessages(library(here)) # Find correct place to load 
+suppressPackageStartupMessages(library(tmap)) # Find correct place to load 
+
+df_bu <- readRDS(file=here("data/df_bu.rds")) %>% filter(partei == "grune")
+df_alter <- readRDS(file=here("data/df_alter.rds")) 
+df_wohnqualitaet <- readRDS(file=here("data/df_wohnqualitaet.rds")) %>% filter(wahl == "BU2_2017")
+df_strukturdaten <- readRDS(here("data/df_strukturdaten.rds"))
+
+
+```
+
+Vorsicht, diese Berechnungen sind als experimentell zu werten.
+
+
+```{r}
+
+
+```
+

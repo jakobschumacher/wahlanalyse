@@ -8,7 +8,7 @@
 ###################################################################################################
 # Settings and loading of user written functions 
 ###################################################################################################
-forcereload_setting = FALSE # Wenn dieser Wert auf TRUE gesetzt wird, lädt das Skript in jedem Fall alle Daten neu ein.
+forcereload_setting = TRUE # Wenn dieser Wert auf TRUE gesetzt wird, lädt das Skript in jedem Fall alle Daten neu ein.
 source(here("R/functions.R")) # Selbstgeschriebene Funktionen
 
 ###################################################################################################
@@ -109,7 +109,6 @@ df_wahlbezirke <- df_wahlbezirke %>%
   select(wahlbezirk)
 
 # Prepare Wahl
-parteienfilter <- c("spd", "grune", "cdu", "fdp", "af_d", "die_linke", "die_partei")
 df_wahlen <- rbind(df_wahlen_2011_AGH, 
                    df_wahlen_2016_AGH,
                    df_wahlen_2009_BU,
@@ -120,9 +119,7 @@ df_wahlen <- rbind(df_wahlen_2011_AGH,
                    df_wahlen_2013_BU) %>% 
   mutate(wahlbezirk = paste0(bezirksnummer, wahlbezirk)) %>% 
   mutate(stimmanteil = round(100*stimmen/gultige_stimmen,1)) %>% 
-  filter(str_detect(wahlbezirksart, "^B", negate = TRUE)) %>% 
-  filter(partei %in% parteienfilter) %>% 
-  select(wahlbezirk, partei, wahl, stimmanteil, jahr)
+  select(wahlbezirk, partei, wahl, wahlberechtigte_insgesamt, gultige_stimmen, stimmanteil, jahr)
 
 rm(df_wahlen_2011_AGH, df_wahlen_2016_AGH, df_wahlen_2009_BU, df_wahlen_2009_EU, df_wahlen_2014_EU, df_wahlen_2017_BU, df_wahlen_2019_EU, df_wahlen_2013_BU)
 

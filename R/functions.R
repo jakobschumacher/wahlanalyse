@@ -69,6 +69,8 @@ read_wahlenberlin <- function(quelle, wahlart, datenname, forcereload = FALSE) {
       pivot_longer(all_of(startnumber):last_col(), names_to="partei", values_to="stimmen") %>% # Pivot des Datensatzes mit Tidyr
       mutate(jahr = as.Date(paste0("01-01-", all_of(jahreszahl)), format = "%d-%m-%Y")) 
     
+    
+    # Bezirksnamenkorrektur
     data <- data %>%
       mutate(bezirksname = ifelse(bezirksname == "Hellersdorf"|bezirksname == "Marzahn", "Marzahn-Hellersdorf", bezirksname)) %>% 
       mutate(bezirksname = ifelse(bezirksname == "Friedrichshain"|bezirksname == "Kreuzberg", "Friedrichshain-Kreuzberg", bezirksname)) %>% 
@@ -79,6 +81,15 @@ read_wahlenberlin <- function(quelle, wahlart, datenname, forcereload = FALSE) {
       mutate(bezirksname = ifelse(bezirksname == "Hohenschönhausen", "Lichtenberg", bezirksname)) %>% 
       mutate(bezirksname = ifelse(bezirksname == "Weißensee"|bezirksname == "Prenzlauer Berg", "Pankow", bezirksname)) %>% 
       mutate(bezirksname = ifelse(bezirksname == "Tiergarten"|bezirksname == "Wedding", "Mitte", bezirksname))
+    
+    # Nur Urnenwahlbezirke rausfiltern
+    data <- data %>% 
+      filter(str_detect(wahlbezirksart, "^B", negate = TRUE))
+    
+    # Parteienfilter
+    parteienfilter <- c("spd", "grune", "cdu", "fdp", "af_d", "die_linke", "die_partei")
+    data <- data %>% 
+      filter(partei %in% parteienfilter) 
     
     
     data <- data %>% 
